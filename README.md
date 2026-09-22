@@ -6,9 +6,7 @@ The site showcases selected projects, technical experience, academic activities,
 
 ## Live Website
 
-Deployment in progress.
-
-Once deployed, the live Vercel URL will be added here.
+https://matthewsutiono.vercel.app/
 
 ## About
 
