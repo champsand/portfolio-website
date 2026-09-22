@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/data/site";
-export const siteUrl = "https://matthewsutiono.com";
+export const siteUrl = "https://matthewsutiono.vercel.app/";
 export const siteDescription = "Computer Science undergraduate at BINUS University specializing in Intelligent Systems, exploring software development, data, and applied AI.";
 export function pageMetadata(title: string, description: string, path: string): Metadata {
   const socialTitle = title === site.name ? title : `${title} — ${site.name}`;
