@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local source/reference assets
+/source-assets/
+
+# Local browser verification artifacts
+/.playwright-cli/
+/output/playwright/
+
+# Local AI/development instructions
+AGENTS.md
+CLAUDE.md
+
+# Internal project documentation
+/docs/

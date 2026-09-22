@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --background: #0b0d10;
+  --surface: #12161c;
+  --foreground: #f5f5f5;
+  --secondary: #a1a1aa;
+  --accent: #A866E6;
+  --line: rgb(255 255 255 / 9%);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection { background: var(--accent); color: var(--background); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+[id] { scroll-margin-top: 7rem; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+
+@layer components {
+  .eyebrow { @apply font-mono text-[10px] leading-5 tracking-[0.12em] uppercase sm:text-[11px]; }
+  .nav-link { @apply text-[13px] text-secondary hover:text-foreground; }
+  .icon-link { @apply inline-flex size-11 items-center justify-center rounded-sm text-secondary hover:bg-surface hover:text-foreground; }
+  .button-primary { @apply inline-flex min-h-12 items-center justify-center gap-5 rounded-sm bg-accent px-5 text-sm font-medium text-background hover:bg-sky-300; }
+  .button-secondary { @apply inline-flex min-h-12 items-center justify-center gap-5 rounded-sm border border-line px-5 text-sm font-medium hover:border-secondary hover:bg-surface; }
+  .section-space { @apply py-20 md:py-28 lg:py-32; }
+  .text-link { @apply inline-flex min-h-11 items-center gap-2 text-sm font-medium underline decoration-transparent underline-offset-4 hover:text-accent hover:decoration-current motion-safe:transition-colors motion-safe:duration-150; }
+}
+
+.hero-section {
+  padding-block: clamp(5rem, 8vw, 7.5rem) 4rem;
+  background: radial-gradient(ellipse at 85% 20%, rgb(56 189 248 / 3%), transparent 55%);
+}
+
+.skip-link { position: fixed; top: -6rem; left: 1.5rem; z-index: 100; padding: 0.75rem 1rem; background: var(--accent); color: var(--background); }
+.skip-link:focus { top: 1rem; }
+
+@media (min-width: 768px) {
+  .hero-section { padding-bottom: 5rem; }
 }
