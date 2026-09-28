@@ -1,23 +1,25 @@
 import Container from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
 import { skills, currentlyLearning } from "@/data/site";
 
 export default function Skills() {
   return (
-    <section id="skills" aria-labelledby="skills-heading" className="section-space border-y border-line bg-surface/40">
+    <section id="skills" aria-labelledby="skills-heading" className="toolbox-section">
       <Container>
-        <SectionHeading label="Skills" title="What I work with." id="skills-heading" />
-        <div className="mt-12 grid gap-10 md:grid-cols-[1.3fr_1.2fr_0.8fr] md:gap-8">
+        <div className="toolbox-heading">
+          <h2 id="skills-heading" className="eyebrow">Toolbox / What I work with</h2>
+          <p className="eyebrow">Practice, in progress</p>
+        </div>
+        <div className="toolbox-inventory">
           {skills.map((group) => (
-            <div key={group.name} className="border-t border-line pt-5">
-              <h3 className="eyebrow text-secondary">{group.name}</h3>
-              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-3 text-base">
+            <div key={group.name} className="toolbox-group">
+              <h3 className="eyebrow">{group.name}</h3>
+              <ul className="toolbox-list">
                 {group.items.map((skill) => <li key={skill}>{skill}</li>)}
               </ul>
             </div>
           ))}
         </div>
-        <p className="mt-12 max-w-3xl text-sm leading-7 text-secondary"><span className="text-foreground">Currently learning:</span> {currentlyLearning}</p>
+        <div className="toolbox-learning"><p className="eyebrow">Currently learning</p><p>{currentlyLearning}</p></div>
       </Container>
     </section>
   );
