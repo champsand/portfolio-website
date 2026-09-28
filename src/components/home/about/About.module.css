@@ -1,0 +1,53 @@
+/* A static editorial pause: no hydration, parallax, or reveal dependency. */
+.section { padding-top: clamp(2rem, 5vw, 6rem); padding-bottom: clamp(3rem, 5vw, 6rem); }
+.paper { color-scheme: light; background: var(--paper); color: var(--ink); padding-block: clamp(3rem, 5vw, 6rem) 2rem; }
+.masthead { display: flex; justify-content: space-between; gap: 1.5rem; color: var(--paper-muted); margin-bottom: clamp(3rem, 5vw, 5.5rem); }
+.masthead > :first-child { color: var(--ink); }
+.composition { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(3rem, 6vw, 6rem); }
+.headline { font-size: clamp(2.7rem, 3.65vw, 3.65rem); font-weight: 500; line-height: 1.09; letter-spacing: -.045em; max-width: 17ch; text-wrap: pretty; }
+.headline em { color: var(--paper-accent); white-space: nowrap; }
+.body { font-size: 16px; line-height: 1.85; color: var(--paper-muted); max-width: var(--text-measure); }
+.opening > .body { margin-top: 2.5rem; }
+.artifacts { position: relative; padding: 1.5rem 1rem 0 1rem; align-self: start; }
+.artifact { position: relative; background: var(--paper-raised); padding: .65rem; border: 1px solid var(--paper-line); }
+.workspace { width: 90%; transform: rotate(-1.5deg); }
+.notes { width: 64%; margin: 1.25rem 0 0 auto; transform: rotate(1.5deg); }
+.artifactVisual { position: relative; overflow: hidden; aspect-ratio: 1.2; background: var(--paper-shade); }
+.notes .artifactVisual { aspect-ratio: 1.2; background: var(--paper-raised); }
+.image { object-fit: cover; }
+.slotLabel { position: absolute; inset: auto 1.4rem 1.5rem; }
+.slotLabel p { margin-top: .4rem; font: italic 32px/1.1 var(--font-instrument-serif), serif; }
+.reserved { display: block; font-size: 11px; line-height: 1.6; margin-top: .75rem; color: var(--paper-muted); }
+.geometry { position: absolute; inset: 0; pointer-events: none; }
+.workspace .geometry span { position: absolute; border: 1px solid var(--paper-line); width: 78%; aspect-ratio: 1; border-radius: 50%; top: -28%; right: -12%; }
+.workspace .geometry span:nth-child(2) { right: 4%; }
+.workspace .geometry span:nth-child(3) { right: 20%; }
+.notes .geometry { inset: 1rem 1rem auto; height: 25%; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
+.notes .geometry::after { content: ''; position: absolute; height: 100%; width: 1px; left: 20%; background: var(--paper-line); }
+.artifact figcaption { display: flex; flex-direction: column; gap: .3rem; padding: .85rem .35rem .3rem; font: 9px/1.7 var(--font-geist-mono), monospace; color: var(--paper-muted); }
+.artifact figcaption > :first-child { color: var(--ink); text-transform: uppercase; letter-spacing: .06em; }
+.afterword { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 6vw, 6rem); margin-top: clamp(4rem, 6vw, 7rem); }
+.marginNote { padding-top: .5rem; }
+.marginNote > :first-child { color: var(--paper-accent); }
+.marginNote > :last-child { font-size: 13px; line-height: 1.8; color: var(--paper-muted); margin-top: 1rem; }
+.lastThought { font: italic clamp(1.8rem, 2.4vw, 2.4rem)/1.25 var(--font-instrument-serif), serif; margin-top: 2rem; max-width: 30ch; }
+.pageEnd { display: flex; justify-content: space-between; border-top: 1px solid var(--paper-line); padding-top: 1rem; margin-top: clamp(3rem, 6vw, 6rem); font: 9px/1.5 var(--font-geist-mono), monospace; color: var(--paper-muted); text-transform: uppercase; letter-spacing: .1em; }
+@media (max-width: 1099px) {
+  .composition { grid-template-columns: 1fr; gap: 3rem; }
+  .headline { max-width: 23ch; font-size: clamp(2.7rem, 5.7vw, 3.8rem); }
+  .artifacts { display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 2rem; padding: 0; }
+  .workspace, .notes { width: 100%; margin: 0; transform: none; }
+  .notes { margin-top: 3rem; }
+  .afterword { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 600px) {
+  .masthead { flex-direction: column; gap: .5rem; }
+  .headline { font-size: clamp(2.4rem, 10.2vw, 3.5rem); }
+  .body { font-size: 15px; line-height: 1.85; }
+  .artifacts { grid-template-columns: 1fr; gap: 1.5rem; }
+  .notes { margin: 0; width: 88%; justify-self: end; }
+  .afterword { margin-top: 3.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workspace, .notes { transform: none; }
+}
