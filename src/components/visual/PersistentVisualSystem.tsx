@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { Component, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { useReducedMotion } from "motion/react";
 import { useSectionProgress, type ScrollSample } from "./useSectionProgress";
 import { visualStates } from "./visualStates";
 
@@ -17,7 +16,14 @@ class SceneBoundary extends Component<{ children:ReactNode; onFailure:() => void
 export default function PersistentVisualSystem() {
   const layer = useRef<HTMLDivElement>(null);
   const pointer = useRef({x:0,y:0});
-  const reduced = useReducedMotion();
+  const [reduced, setReduced] = useState<boolean | null>(null);
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(preference.matches);
+    sync();
+    preference.addEventListener("change", sync);
+    return () => preference.removeEventListener("change", sync);
+  }, []);
   const runningRef = useRef(false);
   const [active, setActive] = useState(false);
   const [compact, setCompact] = useState(true);
@@ -62,6 +68,6 @@ export default function PersistentVisualSystem() {
     };
   }, [onReady, sample, update]);
   return <div ref={layer} className="persistent-visual" aria-hidden="true">
-    <SceneBoundary onFailure={onFailure}><SceneCanvas enabled={reduced === false} sample={sample} pointer={pointer} active={active} compact={compact} onReady={onReady} /></SceneBoundary>
+    {reduced === false && <SceneBoundary onFailure={onFailure}><SceneCanvas enabled sample={sample} pointer={pointer} active={active} compact={compact} onReady={onReady} /></SceneBoundary>}
   </div>;
 }

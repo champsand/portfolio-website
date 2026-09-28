@@ -10,7 +10,8 @@ import { assembly, links, visualStates, type Point } from "./visualStates";
 // Imperative Three material adapter; React never owns these animated properties.
 class Surface {
   readonly opacity:number;
-  constructor(readonly material:Material, public kind:"forms"|"lines"|"nodes"|"orbits") { this.opacity = material.opacity; }
+  readonly filled:boolean;
+  constructor(readonly material:Material, public kind:"forms"|"lines"|"nodes"|"orbits") { this.opacity = material.opacity; this.filled = material.type === "MeshStandardMaterial"; }
   fade(weight:number) { this.material.opacity = this.opacity * weight; }
 }
 
@@ -21,6 +22,8 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
   const foreground = useRef<Group>(null);
   const rear = useRef<Group>(null);
   const orbits = useRef<Group>(null);
+  const groups = useMemo(() => [core, foreground, rear] as const, []);
+  const keys = ["corePosition", "foregroundPosition", "rearPosition"] as const;
   const nodeMeshes = useRef<(Mesh|null)[]>([]);
   const surfaces = useRef<Surface[]>([]);
   const nodeShapes = useMemo(() => [new OctahedronGeometry(.075,0), new OctahedronGeometry(.04,0)], []);
@@ -31,6 +34,7 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
   const ready = useRef(false);
   const opacity = useRef(1);
   const connections = useRef<BufferGeometry>(null);
+  const edgeWeights = useRef(new Float32Array(links.length).fill(1));
   const linePositions = useMemo(() => new Float32Array(links.length * 6), []);
   const orbit = useMemo(() => Array.from({ length:81 }, (_,i):Point => {
     const angle = i / 80 * Math.PI * 2;
@@ -73,7 +77,7 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
     const baseSize = Math.min(s.height * .85,850) / s.height;
     let size = lerp(a.scale,b.scale,mix) * baseSize;
     size = lerp(size,s.hero.height / s.height * (compact ? .93 : 1),heroWeight);
-    size = lerp(size,Math.min(s.contact.height,520) / s.height,contactWeight);
+    size = lerp(size,Math.min(s.height * .92,920) / s.height * lerp(a.scale,b.scale,mix),contactWeight);
     if (compact && !mobile) size *= lerp(.72,1,heroWeight);
     root.current.position.x = lerp(root.current.position.x,(x-.5)*viewport.width,blend);
     root.current.position.y = lerp(root.current.position.y,(.5-y)*viewport.height,blend);
@@ -82,20 +86,28 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
     root.current.rotation.y = lerp(root.current.rotation.y,lerp(a.rotation[1],b.rotation[1],mix)+Math.sin(t*.09)*.14*idle+px*.12,blend);
     root.current.rotation.z = lerp(root.current.rotation.z,lerp(a.rotation[2],b.rotation[2],mix),blend);
     const spread = lerp(a.spread,b.spread,mix);
-    core.current.rotation.y = .5 + Math.sin(t*.065)*.12;
+    const depth = lerp(a.depth,b.depth,mix);
+    for (let i=0;i<3;i++) {
+      const group = groups[i].current!;
+      const key = keys[i];
+      group.position.set(
+        lerp(group.position.x,lerp(a[key][0],b[key][0],mix),blend),
+        lerp(group.position.y,lerp(a[key][1],b[key][1],mix),blend),
+        lerp(group.position.z,lerp(a[key][2],b[key][2],mix),blend));
+      group.scale.setScalar(lerp(group.scale.x,lerp(i === 0 ? a.primaryScale : a.secondaryScale,i === 0 ? b.primaryScale : b.secondaryScale,mix),blend));
+    }
+    orbits.current.scale.set(lerp(a.orbitScale[0],b.orbitScale[0],mix),lerp(a.orbitScale[1],b.orbitScale[1],mix),lerp(a.orbitScale[2],b.orbitScale[2],mix));
+    core.current.rotation.y = .5 + Math.sin(t*.065)*.12 + spread*.35;
     core.current.rotation.z = -.3 - spread*.2;
-    foreground.current.position.x = lerp(foreground.current.position.x,spread*.85+px*.09,blend);
-    foreground.current.position.y = lerp(foreground.current.position.y,-spread*.35-py*.06,blend);
-    foreground.current.rotation.y = Math.sin(t*.08)*.1;
-    rear.current.position.x = lerp(rear.current.position.x,-spread*.55-px*.05,blend);
-    rear.current.position.y = lerp(rear.current.position.y,spread*.22,blend);
-    rear.current.rotation.z = Math.sin(t*.045)*.08;
+    foreground.current.rotation.y = Math.sin(t*.08)*.1 + spread*.45;
+    rear.current.rotation.z = Math.sin(t*.045)*.08 - spread*.25;
     for (let i=0;i<assembly.length;i++) {
       const mesh = nodeMeshes.current[i];
       if (!mesh) continue;
       mesh.position.x = lerp(mesh.position.x,lerp(a.nodes[i][0],b.nodes[i][0],mix),blend);
       mesh.position.y = lerp(mesh.position.y,lerp(a.nodes[i][1],b.nodes[i][1],mix),blend);
-      mesh.position.z = lerp(mesh.position.z,lerp(a.nodes[i][2],b.nodes[i][2],mix),blend);
+      mesh.position.z = lerp(mesh.position.z,lerp(a.nodes[i][2],b.nodes[i][2],mix)*depth,blend);
+      mesh.scale.setScalar(lerp(mesh.scale.x,MathUtils.clamp(lerp(a.nodeCount,b.nodeCount,mix)-i,0,1),blend));
       mesh.visible = !compact || i % 2 === 0;
     }
     const positions = connections.current.attributes.position;
@@ -103,7 +115,9 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
       const start = nodeMeshes.current[links[i][0]], end = nodeMeshes.current[links[i][1]];
       if (!start || !end) continue;
       positions.setXYZ(i*2,start.position.x,start.position.y,start.position.z);
-      positions.setXYZ(i*2+1,end.position.x,end.position.y,end.position.z);
+      // Retract unused links into their source nodes: continuous topology, no popping.
+      edgeWeights.current[i] = lerp(edgeWeights.current[i],compact && i % 2 ? 0 : lerp(a.edges[i],b.edges[i],mix),blend);
+      positions.setXYZ(i*2+1,lerp(start.position.x,end.position.x,edgeWeights.current[i]),lerp(start.position.y,end.position.y,edgeWeights.current[i]),lerp(start.position.z,end.position.z,edgeWeights.current[i]));
     }
     positions.needsUpdate = true;
     // The bounded lattice moves; don't retain an obsolete initial culling sphere.
@@ -113,7 +127,7 @@ export default function PersistentScene({ sample, pointer, active, compact, onRe
     opacity.current = lerp(opacity.current,targetOpacity,blend);
     for (const entry of surfaces.current) {
       const weight = entry.kind === "nodes" ? 1 : lerp(a[entry.kind],b[entry.kind],mix);
-      entry.fade(opacity.current * weight);
+      entry.fade(opacity.current * weight * (entry.filled ? lerp(a.surface,b.surface,mix) : 1));
     }
     core.current.visible = rear.current.visible = foreground.current.visible = lerp(a.forms,b.forms,mix) > .01;
     orbits.current.visible = !compact && lerp(a.orbits,b.orbits,mix) > .01;

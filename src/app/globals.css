@@ -487,7 +487,8 @@ button { cursor: pointer; }
 .home-page #beyond-code > *, .home-page #certifications > *,
 .home-page #contact > *, .home-page #home-footer { position: relative; z-index: 2; }
 .home-page .chapter-media { z-index: 2; }
-.home-page #about { position: relative; z-index: 2; background: var(--background); }
+.home-page #about { position: relative; }
+.home-page #about > * { position: relative; z-index: 2; }
 /* Solid media and copy surfaces protect project text while fragments pass around edges. */
 .home-page .chapter-copy, .home-page .chapter-links { background: var(--background); }
 .home-page .chapter-language .chapter-copy, .home-page .chapter-language .chapter-links { background: #0c0f13; }
@@ -497,3 +498,12 @@ button { cursor: pointer; }
   .persistent-visual { display: none; }
   .home-page[data-scene-ready="true"] .hero-fallback { visibility: visible; }
 }
+
+/* Reserve a closing scroll beat so Contact can resolve before the final fade. */
+@media (min-width: 769px) {
+  .home-page #home-footer { padding-bottom: clamp(12rem, 30vh, 22rem); }
+}
+
+.home-page #contact-heading, .home-page .contact-actions,
+.home-page .contact-description, .home-page #journey-heading,
+.home-page #certifications > * { background: var(--background); }

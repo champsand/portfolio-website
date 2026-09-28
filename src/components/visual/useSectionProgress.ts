@@ -34,7 +34,7 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       value.to = next.state;
       value.sectionProgress = progress;
       // Hold a composition, then morph across the last 55% of its measured interval.
-      const hold = current.state === "contact" ? .7 : .45;
+      const hold = current.state === "contact" ? .7 : current.state === "credentials" ? .15 : .4;
       const transition = Math.max(0, (progress - hold) / (1 - hold));
       value.mix = transition * transition * (3 - 2 * transition);
       onChange(value);
