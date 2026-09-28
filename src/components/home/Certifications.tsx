@@ -5,20 +5,20 @@ import { certifications } from "@/data/certifications";
 
 export default function Certifications() {
   return (
-    <section id="certifications" aria-labelledby="certifications-heading" className="border-y border-line py-16 md:py-20">
-      <Container className="grid gap-9 lg:grid-cols-[1fr_1.65fr] lg:gap-20">
-        <div>
-          <p className="eyebrow mb-4 text-accent">Certifications</p>
-          <h2 id="certifications-heading" className="text-[28px] font-medium tracking-[-0.035em]">Continuing to learn.</h2>
-        </div>
-        <ul className="divide-y divide-line">
+    <section id="certifications" aria-labelledby="certifications-heading" className="credentials-section">
+      <Container>
+        <div className="credentials-heading"><p className="eyebrow closing-label">07 / Credentials</p><h2 id="certifications-heading">Continuing to learn.</h2></div>
+        <div className="credential-columns eyebrow" aria-hidden="true"><span>Year</span><span>Issuer</span><span>Certification</span><span>Record</span></div>
+        <ul className="credential-list">
           {certifications.map((certificate) => (
-            <li key={certificate.title} className="py-6 first:pt-0 last:pb-0">
-              <p className="font-mono text-xs text-secondary">{certificate.issuer} · {certificate.year}</p>
-              <h3 className="mt-2 text-base font-medium leading-7">{certificate.title}</h3>
-              {certificate.credentialUrl ? (
-                <ExternalLink href={certificate.credentialUrl} className="text-link mt-1" aria-label={`View Credential: ${certificate.title} (opens in a new tab)`}>View Credential <ArrowUpRight size={15} aria-hidden="true" /></ExternalLink>
-              ) : <p className="mt-3 font-mono text-xs leading-6 text-secondary">Credential ID: {certificate.credentialId}</p>}
+            <li key={certificate.title} className="credential-row">
+              <p className="credential-year">{certificate.year}</p>
+              <p className="credential-issuer">{certificate.issuer}</p>
+              <h3>{certificate.title}</h3>
+              <div className="credential-record">
+                {certificate.credentialUrl && <ExternalLink href={certificate.credentialUrl} className="text-link" aria-label={`View Credential: ${certificate.title} (opens in a new tab)`}>View Credential<ArrowUpRight size={15} aria-hidden="true" /></ExternalLink>}
+                {certificate.credentialId && <p>Credential ID: {certificate.credentialId}</p>}
+              </div>
             </li>
           ))}
         </ul>
