@@ -21,8 +21,8 @@ export default function Home() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <Currently />
-        <About />
         <Projects />
+        <About />
         <Skills />
         <Journey />
         <BeyondCode />

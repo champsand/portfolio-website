@@ -180,3 +180,129 @@ button { cursor: pointer; }
   .hero-section [style] { transform: none !important; opacity: 1 !important; }
 }
 
+
+/* Stage 3: native-scroll project chapters. No ancestor overflow: sticky stays local. */
+.selected-work { --work-accent: #baa3d2; padding-bottom: clamp(2rem, 5vw, 6rem); }
+.work-shell { width: 100%; max-width: 1800px; margin-inline: auto; padding-inline: clamp(1.5rem, 6vw, 7rem); }
+.work-intro { padding-block: clamp(3.5rem, 6vw, 6rem) 3rem; }
+.work-intro-index { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.6rem; }
+.work-intro h2 { font-size: clamp(2rem, 3.6vw, 4rem); font-weight: 500; line-height: 1.12; letter-spacing: -.045em; }
+.work-chapters { position: relative; }
+.project-progress { position: sticky; top: 72px; z-index: 20; display: flex; justify-content: flex-end; gap: 1.5rem; padding: .4rem clamp(1.5rem, 6vw, 7rem); background: var(--background); border-block: 1px solid var(--line); }
+.project-progress a { display: flex; align-items: center; gap: .7rem; min-height: 44px; color: var(--secondary); font: 10px/1.5 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .05em; }
+.progress-line { width: 32px; height: 1px; background: var(--line); }
+.project-progress a[aria-current] { color: var(--work-accent); }
+.project-progress a[aria-current] .progress-line { background: currentColor; }
+.project-progress a:hover { color: var(--foreground); }
+.project-chapter { position: relative; scroll-margin-top: 148px; }
+.chapter-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); grid-template-rows: auto 1fr; column-gap: clamp(2rem, 4vw, 5rem); padding-block: clamp(3rem, 5vh, 5rem) 5rem; min-height: 105svh; }
+.chapter-copy { grid-column: 1; grid-row: 1; align-self: start; }
+.chapter-meta { display: flex; align-items: center; gap: 1.3rem; color: var(--secondary); font: 10px/1.9 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .06em; }
+.chapter-number { color: var(--work-accent); font-size: 42px; line-height: 1; font-weight: 300; letter-spacing: -.08em; padding-right: 1.3rem; border-right: 1px solid var(--line); }
+.chapter-title { font-weight: 500; font-size: clamp(2.7rem, 4.2vw, 5.4rem); line-height: 1.02; letter-spacing: -.055em; margin-block: 2.4rem 1.6rem; text-wrap: initial; max-width: 12ch; }
+.chapter-product .chapter-title { font-size: clamp(4.5rem, 7vw, 8.5rem); max-width: 7ch; }
+.chapter-vision .chapter-title { font-size: clamp(2.8rem, 4.5vw, 5.8rem); }
+.chapter-role { font-size: 13px; line-height: 1.7; color: var(--work-accent); }
+.chapter-description { max-width: 41ch; margin-top: 1rem; color: var(--secondary); font-size: 15px; line-height: 1.85; }
+.chapter-technologies { display: flex; flex-wrap: wrap; margin-top: 1.3rem; max-width: 43ch; font: 10px/2 var(--font-geist-mono), monospace; color: var(--secondary); }
+.chapter-technologies li:not(:last-child)::after { content: '/'; padding-inline: .65rem; color: #686471; }
+.chapter-links { grid-column: 1; grid-row: 2; align-self: start; padding-top: 1.6rem; }
+.chapter-primary { display: inline-flex; min-height: 48px; gap: 2.5rem; align-items: center; border-bottom: 1px solid var(--work-accent); font-size: 15px; }
+.chapter-primary:hover { color: var(--work-accent); }
+.chapter-secondary { display: flex; gap: 1.5rem; margin-top: .5rem; color: var(--secondary); }
+.chapter-secondary .text-link { font-size: 12px; }
+.chapter-media { grid-column: 2; grid-row: 1 / 3; position: sticky; top: 164px; align-self: start; min-width: 0; }
+.visual-caption { display: flex; justify-content: space-between; gap: 1rem; color: var(--secondary); font: 9px/1.7 var(--font-geist-mono), monospace; letter-spacing: .08em; text-transform: uppercase; }
+.project-screenshot { position: relative; width: 100%; aspect-ratio: 1912 / 1074; background: #0b0b10; }
+.chapter-product { background: radial-gradient(ellipse at 74% 40%, rgb(121 83 157 / 6%), transparent 58%); }
+.product-stage { position: relative; padding-top: 2.5rem; padding-bottom: 6rem; margin-top: 1rem; }
+.product-backing { position: absolute; inset: .5rem 4% 3.5rem 7%; background: #17141f; border: 1px solid #302637; transform: rotate(3deg); }
+.product-motion { position: relative; box-shadow: 0 24px 60px #0006; }
+.product-motion .project-screenshot { aspect-ratio: 1600 / 794; }
+.demo-preview { position: absolute; bottom: 0; right: 3%; width: 43%; max-width: 340px; box-shadow: 0 16px 32px #0006; background: #101016; border: 1px solid #46404e; padding: 5px; }
+.demo-preview button { position: relative; display: block; width: 100%; aspect-ratio: 1280 / 630; }
+.demo-preview button img { object-fit: cover; opacity: .65; }
+.demo-preview button > span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: .5rem; font: 10px/1.5 var(--font-geist-mono), monospace; color: white; background: #0003; }
+.demo-preview video { width: 100%; aspect-ratio: 1280 / 630; }
+.demo-caption { font: 8px/1.6 var(--font-geist-mono), monospace; padding: .4rem; color: var(--secondary); }
+.demo-preview.is-open { width: 70%; max-width: none; z-index: 2; }
+.visual-concept { font: 400 clamp(1.4rem, 2.1vw, 2.5rem)/1.2 var(--font-bricolage), sans-serif; letter-spacing: -.04em; max-width: 10ch; color: var(--work-accent); margin-top: -2.5rem; }
+.chapter-language { border-top: 1px solid var(--line); background: #0c0f13; }
+.language-visual { padding-top: .5rem; }
+.analysis-concept { font: 500 clamp(1.8rem, 3vw, 3.6rem)/1.1 var(--font-bricolage), sans-serif; letter-spacing: -.05em; margin-block: 1.5rem; }
+.language-signals { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+.language-signals > div { border-top: 1px solid #baa3d266; padding-top: .8rem; }
+.language-signals > div + div { border-color: #879fa966; }
+.language-signals p { font-size: 16px; letter-spacing: -.025em; }
+.language-signals span { display: block; margin-top: .5rem; font: 9px/1.7 var(--font-geist-mono), monospace; color: var(--secondary); }
+.language-visual .project-screenshot { width: 88%; margin-left: auto; }
+.analysis-footnote { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; margin-top: 1rem; color: var(--secondary); font: 9px/1.8 var(--font-geist-mono), monospace; }
+.analysis-footnote strong { color: var(--work-accent); font-size: 19px; font-weight: 400; margin-right: .4rem; }
+.chapter-vision { border-top: 1px solid var(--line); background: radial-gradient(ellipse at 70% 45%, rgb(94 115 77 / 5%), transparent 60%); }
+.vision-concept { margin-top: 1.5rem; font: 500 clamp(1.6rem, 2.5vw, 3rem)/1.15 var(--font-bricolage), sans-serif; letter-spacing: -.04em; }
+.vision-pipeline { margin-block: 1.5rem; font: 9px/1.7 var(--font-geist-mono), monospace; }
+.pipeline-route { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.pipeline-route strong { font-weight: 400; color: #c1ccb4; border: 1px solid #6c796b; padding: .7rem; }
+.pipeline-route > span[aria-hidden] { color: #788a76; }
+.pipeline-reject { margin-left: 38%; color: var(--secondary); padding-top: .4rem; }
+.pipeline-reject > span { color: #788a76; margin-right: .5rem; }
+.vision-frame { position: relative; margin-right: 7%; padding: .7rem; border: 1px solid #3e493e; }
+.vision-frame .project-screenshot { aspect-ratio: 1919 / 1027; }
+.vision-cross { position: absolute; font: 18px/1 var(--font-geist-mono), monospace; color: #afbea7; background: var(--background); }
+.cross-top { top: -10px; left: -6px; }
+.cross-bottom { bottom: -9px; right: -6px; }
+.vision-note { max-width: 55ch; margin: 1rem 7% 0 0; font: 9px/1.8 var(--font-geist-mono), monospace; color: var(--secondary); }
+@media (min-width: 1100px) and (max-height: 800px) {
+  .chapter-grid { padding-block: 2.5rem 4rem; min-height: 110svh; }
+  .chapter-title { margin-block: 1.5rem 1rem; font-size: clamp(2.6rem, 3.9vw, 4.7rem); }
+  .chapter-product .chapter-title { font-size: 6.4vw; }
+  .chapter-media { top: 155px; }
+  .chapter-media figure { max-width: min(100%, 84vh); margin-left: auto; }
+  .product-stage { padding-top: 1.5rem; padding-bottom: 5rem; }
+  .analysis-concept, .vision-concept { margin-top: 1rem; }
+}
+@media (max-width: 1099px) {
+  .project-progress { position: static; justify-content: flex-start; }
+  .chapter-grid { grid-template-columns: 1fr; min-height: auto; padding-block: 3.5rem 4rem; gap: 2rem; }
+  .chapter-copy, .chapter-media, .chapter-links { grid-column: 1; grid-row: auto; }
+  .chapter-media { position: static; width: 100%; }
+  .chapter-title, .chapter-vision .chapter-title { font-size: clamp(2.7rem, 6vw, 4.5rem); max-width: 18ch; margin-block: 1.5rem 1rem; }
+  .chapter-product .chapter-title { font-size: clamp(4rem, 9vw, 6rem); max-width: none; }
+  .chapter-description { max-width: 60ch; }
+  .chapter-links { padding-top: 0; }
+  .product-motion { transform: none !important; }
+  .chapter-technologies { max-width: none; }
+  .visual-concept { max-width: none; margin-top: 1.2rem; }
+}
+@media (max-width: 599px) {
+  .work-intro-index { flex-direction: column; gap: .5rem; }
+  .work-intro { padding-bottom: 2rem; }
+  .project-progress { gap: 1rem; justify-content: space-between; }
+  .progress-name { display: none; }
+  .chapter-meta { font-size: 9px; }
+  .chapter-number { font-size: 34px; }
+  .chapter-title, .chapter-vision .chapter-title { font-size: clamp(2.4rem, 10.5vw, 3.5rem); }
+  .chapter-product .chapter-title { font-size: 16vw; }
+  .chapter-description { font-size: 14px; }
+  .visual-caption { font-size: 8px; gap: 1rem; }
+  .visual-caption > span { max-width: 48%; }
+  .product-stage { padding-top: 1rem; padding-bottom: 5rem; }
+  .demo-preview { width: 65%; right: 0; }
+  .demo-preview.is-open { width: 100%; }
+  .demo-caption { font-size: 7px; }
+  .language-signals { gap: 1rem; }
+  .language-signals p { font-size: 14px; }
+  .language-signals span { font-size: 8px; }
+  .language-visual .project-screenshot { width: 100%; }
+  .pipeline-route { font-size: 8px; gap: .3rem; }
+  .pipeline-route strong { padding: .5rem; max-width: 90px; text-align: center; }
+  .pipeline-reject { margin-left: 34%; font-size: 8px; }
+  .vision-frame { margin-right: 0; }
+  .vision-note { margin-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selected-work .product-motion { transform: none !important; }
+}
+@media (min-width: 1100px) and (max-height: 650px) {
+  .chapter-media { position: static; }
+}

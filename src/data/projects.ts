@@ -4,6 +4,11 @@ import type { Project } from "@/types/portfolio";
 export const projects: Project[] = [
   {
     slug: "habit-flow", title: "Habit Flow", year: 2026, category: "Full-Stack · AI",
+    showcase: {
+      kind: "product", label: "A practice of consistency", shortTitle: "Habit Flow",
+      concept: "Reflection, not perfection.",
+      demo: { src: "/media/habit-flow-demo.mp4", poster: "/images/projects/habit-flow-demo-poster.jpg", description: "Recorded walkthrough of Habit Flow’s habit tracking interface. The dashboard shows weekly progress and daily check-ins." },
+    },
     role: "Software Engineering Project Lead", teamSize: 5,
     caseStudyHref: "/projects/habit-flow",
     technologyGroups: [
@@ -29,6 +34,14 @@ export const projects: Project[] = [
   },
   {
     slug: "hate-speech-detection", title: "Indonesian Hate Speech Detection", year: 2026, category: "NLP · Machine Learning",
+    showcase: {
+      kind: "language", label: "Language / analysis", shortTitle: "Hate Speech",
+      concept: "Related. Not identical.",
+      signals: [
+        { label: "Toxicity risk", detail: "IndoBERT · risk probabilities" },
+        { label: "Abusive language", detail: "Lexicon matching · flagged terms" },
+      ],
+    },
     caseStudyHref: "/projects/hate-speech-detection",
     role: "Machine Learning / NLP Project Contributor",
     description: "An Indonesian NLP moderation project that distinguishes overall hate or toxicity risk from abusive expressions found within the text.",
@@ -48,6 +61,11 @@ export const projects: Project[] = [
   },
   {
     slug: "tomato-leaf-detection", title: "Tomato Leaf Disease Detection", year: 2026, category: "Computer Vision · Robustness",
+    showcase: {
+      kind: "vision", label: "Vision / validation", shortTitle: "Tomato Leaf",
+      concept: "Before the prediction.",
+      pipeline: { input: "Image input", validation: "Heuristic validation", accepted: "Classification", rejected: "Invalid input → reject", note: "Passing validation does not prove the image is a tomato leaf." },
+    },
     caseStudyHref: "/projects/tomato-leaf-detection",
     role: "Computer Vision Project Contributor", teamSize: 7,
     description: "A computer vision project for classifying tomato-leaf health while exploring how to reject images that should never reach the classifier in the first place.",
