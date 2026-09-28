@@ -163,8 +163,8 @@ button { cursor: pointer; }
 .hero-index li + li::before { content: '→'; margin-right: .7rem; color: #766384; }
 .hero-visual { position: absolute; width: 64%; right: -1%; top: 50%; translate: 0 -52%; min-width: 0; pointer-events: none; }
 .hero-sculpture { position: relative; height: clamp(520px, 48vw, 850px); background: radial-gradient(ellipse at 55% 48%, rgb(145 103 192 / 10%), transparent 62%); }
-.hero-fallback, .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-sculpture[data-ready="true"] .hero-fallback { visibility: hidden; }
+.hero-fallback { position: absolute; inset: 0; width: 100%; height: 100%; }
+.home-page[data-scene-ready="true"] .hero-fallback { visibility: hidden; }
 .hero-scroll-wrap { position: relative; z-index: 1; margin-top: clamp(2.5rem, 7vh, 5rem); }
 .hero-scroll { display: inline-flex; align-items: center; gap: 1.25rem; min-height: 44px; font: 10px/1.5 var(--font-geist-mono), monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--secondary); }
 .hero-scroll > span { font: 24px/1 var(--font-geist-sans), sans-serif; color: var(--accent); }
@@ -475,4 +475,25 @@ button { cursor: pointer; }
   .contact-email { transition: color 200ms, border-color 200ms; }
   .contact-email svg { transition: transform 200ms var(--ease-out); }
   .contact-email:is(:hover, :focus-visible) svg { transform: translate(2px, -2px); }
+}
+/* Stage 7: one homepage-scoped renderer, between backgrounds and readable content. */
+.home-page { isolation: isolate; }
+.persistent-visual { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: clip; }
+.persistent-visual canvas { pointer-events: none; }
+.home-page .hero-copy, .home-page .hero-scroll-wrap,
+.home-page #currently > *, .home-page .work-intro,
+.home-page .chapter-copy, .home-page .chapter-links,
+.home-page #skills > *, .home-page #journey > *,
+.home-page #beyond-code > *, .home-page #certifications > *,
+.home-page #contact > *, .home-page #home-footer { position: relative; z-index: 2; }
+.home-page .chapter-media { z-index: 2; }
+.home-page #about { position: relative; z-index: 2; background: var(--background); }
+/* Solid media and copy surfaces protect project text while fragments pass around edges. */
+.home-page .chapter-copy, .home-page .chapter-links { background: var(--background); }
+.home-page .chapter-language .chapter-copy, .home-page .chapter-language .chapter-links { background: #0c0f13; }
+.home-page .language-visual { background: #0c0f13; }
+.home-page .vision-visual { background: var(--background); }
+@media (prefers-reduced-motion: reduce), (forced-colors: active), print {
+  .persistent-visual { display: none; }
+  .home-page[data-scene-ready="true"] .hero-fallback { visibility: visible; }
 }

@@ -11,7 +11,7 @@ export default function Contact() {
         <p className="eyebrow closing-label">08 / Contact</p>
         <div className="contact-composition">
           <h2 id="contact-heading">{contact.heading}</h2>
-          {/* The open upper-right field is reserved for future sculpture reassembly. */}
+          {/* The persistent sculpture reassembles in this open upper-right field. */}
           <p className="contact-description">{contact.description}</p>
           <div className="contact-actions">
             <p className="eyebrow text-secondary">Email me</p>
