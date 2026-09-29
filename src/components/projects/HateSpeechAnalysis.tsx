@@ -1,7 +1,7 @@
 import { ArrowDown } from "lucide-react";
 
 export default function HateSpeechAnalysis() {
-  return <figure aria-label="Two separate analysis layers" className="rounded-sm border border-line bg-surface p-5 text-sm leading-6 sm:p-8">
+  return <figure aria-label="Two separate analysis layers" className="case-analysis">
     <div className="text-center">
       <p className="font-medium text-foreground">Indonesian Text</p>
       <ArrowDown className="mx-auto my-3 text-secondary" size={18} aria-hidden="true" />

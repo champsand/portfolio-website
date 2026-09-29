@@ -36,7 +36,7 @@ export const visualStates = {
   beyond: state({ nodeCount:4, x:.92, y:.5, scale:1.18, opacity:.26, forms:.3, surface:0, lines:.4, orbits:.4, spread:1.8, depth:.6, corePosition:[1.5,0,-1], orbitScale:[1.5,1.3,1], pointer:.03, idle:.08, nodes:scattered }),
   credentials: state({ nodeCount:4, x:.78, y:.45, scale:.85, opacity:.18, forms:.12, surface:.1, lines:.4, orbits:0, spread:1.8, depth:.4, corePosition:[1,0,-1.8], pointer:0, idle:.04, nodes:scattered }),
   contact: state({ x:.76, y:.42, scale:1.02, rotation:[.25,-.65,.2], opacity:.88, forms:1, surface:.75, lines:1.15, orbits:.45, spread:.2, depth:1.35, primaryScale:1.15, secondaryScale:.85, corePosition:[.45,.4,0], foregroundPosition:[.4,.8,0], rearPosition:[.25,.3,0], orbitScale:[1.1,.75,1], nodes:assembly.map(([x,y,z]): Point => [x,y + .65,z]), pointer:.15, idle:.25 }),
-  footer: state({ nodeCount:1, x:.85, y:.25, scale:.7, rotation:[.25,-.65,.2], opacity:.15, forms:.2, surface:.15, lines:.35, orbits:.1, spread:.2, depth:.6, pointer:0, idle:.03 }),
+  footer: state({ nodeCount:7, x:.76, y:.42, scale:.94, rotation:[.25,-.65,.2], opacity:.44, forms:.85, surface:.65, lines:.9, orbits:.25, spread:.35, depth:1.1, primaryScale:1.15, secondaryScale:.85, corePosition:[.45,.4,0], foregroundPosition:[.4,.8,0], rearPosition:[.25,.3,0], orbitScale:[1.1,.75,1], nodes:assembly.map(([x,y,z]): Point => [x,y + .65,z]), pointer:0, idle:.06 }),
 };
 export type VisualState = keyof typeof visualStates;
 export const sections: { id: string; state: VisualState }[] = [

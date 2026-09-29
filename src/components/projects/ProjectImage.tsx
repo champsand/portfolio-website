@@ -6,15 +6,20 @@ interface ProjectImageProps {
   width: number;
   height: number;
   caption?: string;
+  eager?: boolean;
 }
 
-export default function ProjectImage({ src, alt, width, height, caption }: ProjectImageProps) {
+export default function ProjectImage({ src, alt, width, height, caption, eager = false }: ProjectImageProps) {
   return (
-    <figure>
+    <figure className="case-image">
       <Image src={src} alt={alt} width={width} height={height}
-        sizes="(min-width: 1276px) 1180px, (min-width: 1024px) calc(100vw - 96px), (min-width: 768px) calc(100vw - 80px), calc(100vw - 48px)"
+        loading={eager ? "eager" : "lazy"}
+        sizes={eager ? "(min-width: 1100px) 55vw, calc(100vw - 48px)" : "(min-width: 1600px) 1360px, (min-width: 768px) 85vw, calc(100vw - 48px)"}
         className="h-auto w-full rounded-sm border border-line" />
-      {caption && <figcaption className="mt-4 font-mono text-xs leading-6 text-secondary">{caption}</figcaption>}
+      <figcaption className="case-image-caption">
+        {caption && <span>{caption}</span>}
+        <a href={src} target="_blank" rel="noopener noreferrer" className="text-link" aria-label={`Open full-size image: ${alt} (opens in a new tab)`}>Full-size image <span aria-hidden="true">↗</span></a>
+      </figcaption>
     </figure>
   );
 }

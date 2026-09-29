@@ -71,9 +71,9 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       const actions = document.querySelector(".contact-actions")?.getBoundingClientRect();
       if (contact && actions) {
         // Content-relative thresholds need no spacer or arbitrary page pixels.
-        // On tall screens the complete fade may lie beyond available scrolling.
+        // End with a partial assembly; never add scroll distance to finish a fade.
         contactFadeStart = actions.bottom + window.scrollY - value.height * .95;
-        contactFadeEnd = Math.max(maxScroll, actions.bottom + window.scrollY - value.height * .15);
+        contactFadeEnd = maxScroll;
       }
       if (contact && heading) value.contact = { x:contact.left + contact.width * .76, y:heading.top + window.scrollY + heading.height / 2, height:heading.height * 1.6 };
       update(window.scrollY);

@@ -1,9 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Container from "@/components/layout/Container";
 import ProjectHero from "@/components/projects/ProjectHero";
-import ProjectImage from "@/components/projects/ProjectImage";
 import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectNavigation from "@/components/projects/ProjectNavigation";
 import { ContributionDetails, Limitations } from "@/components/projects/StoryDetails";
@@ -20,19 +18,14 @@ export default function HateSpeechPage() {
   return <>
     <a href="#main-content" className="skip-link">Skip to content</a>
     <Navbar />
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="case-study case-language">
       <ProjectHero project={project} focus={story.focus} />
-      <Container className="pb-16 md:pb-24">
-        <ProjectImage src={project.image} width={1912} height={1074}
-          alt="Indonesian Hate Speech Detector interface showing text analysis results and model probabilities."
-          caption="The interface presents contextual predictions alongside supporting language-level information." />
-      </Container>
       <ProjectSection id="overview" number="01" title="Overview" {...story.overview} />
       <ProjectSection id="problem" number="02" title="The Problem" {...story.problem} />
       <ProjectSection id="role" number="03" title="My Role" paragraphs={[story.role]}>
         <ContributionDetails items={story.contributions} />
       </ProjectSection>
-      <ProjectSection id="how-it-works" number="04" title="How It Works">
+      <ProjectSection id="how-it-works" number="04" title="How It Works" wide>
         <HateSpeechAnalysis />
         <p>Preprocessing includes lowercasing and cleanup, URL and mention handling, common character normalization, slang normalization, and stopword handling.</p>
         <p>The current deployed detector primarily uses fine-tuned IndoBERT. The abusive-language lexicon independently checks processed terms and short phrases.</p>
@@ -57,13 +50,13 @@ export default function HateSpeechPage() {
         </dl>
         <p>The interface may show an “Abusive / Profane” state when the model does not strongly predict hate speech but lexicon matches are present. This is a presentation of two analysis layers, not a third model class.</p>
       </ProjectSection>
-      <ProjectSection id="experimentation" number="07" title="Model Experimentation">
+      <ProjectSection id="experimentation" number="07" title="Model Experimentation" wide>
         <p>We compared IndoBERT, Logistic Regression, SVM, and Naive Bayes. IndoBERT provided the strongest documented accuracy among these experiments.</p>
         <ModelMetrics metrics={project.metrics!} caption="Documented model comparison · accuracy" />
         <p className="text-sm leading-7">The additional models were used for comparison and experimentation. The live prediction is primarily from IndoBERT, not an ensemble of all four models.</p>
       </ProjectSection>
-      <ProjectSection id="learned" number="08" title="What I Learned" {...story.learned} />
-      <ProjectSection id="limitations" number="09" title="Limitations"><Limitations items={story.limitations} /></ProjectSection>
+      <ProjectSection id="limitations" number="08" title="Limitations"><Limitations items={story.limitations} /></ProjectSection>
+      <ProjectSection id="learned" number="09" title="What I Learned" {...story.learned} />
       <ProjectNavigation project={project} />
     </main>
     <Footer />

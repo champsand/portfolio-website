@@ -1,9 +1,7 @@
 import { pageMetadata } from "@/lib/metadata";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import Container from "@/components/layout/Container";
 import ProjectHero from "@/components/projects/ProjectHero";
-import ProjectImage from "@/components/projects/ProjectImage";
 import ProjectSection from "@/components/projects/ProjectSection";
 import ProjectNavigation from "@/components/projects/ProjectNavigation";
 import { ContributionDetails, Limitations } from "@/components/projects/StoryDetails";
@@ -19,13 +17,8 @@ export default function TomatoLeafPage() {
   return <>
     <a href="#main-content" className="skip-link">Skip to content</a>
     <Navbar />
-    <main id="main-content" tabIndex={-1}>
+    <main id="main-content" tabIndex={-1} className="case-study case-vision">
       <ProjectHero project={project} focus={story.focus} />
-      <Container className="pb-16 md:pb-24">
-        <ProjectImage src={project.image} width={1919} height={1027}
-          alt="Tomato Leaf Disease Detection interface showing an uploaded leaf and Healthy, Early Blight, and Late Blight prediction probabilities."
-          caption="An uploaded leaf and the classifier’s three supported health conditions." />
-      </Container>
       <ProjectSection id="overview" number="01" title="Overview" {...story.overview} />
       <ProjectSection id="scope" number="02" title="Starting Too Broad" {...story.problem}>
         <dl className="divide-y divide-line text-base">
@@ -41,7 +34,7 @@ export default function TomatoLeafPage() {
       <ProjectSection id="role" number="03" title="My Role" paragraphs={[story.role]}>
         <ContributionDetails items={story.contributions} />
       </ProjectSection>
-      <ProjectSection id="how-it-works" number="04" title="How It Works">
+      <ProjectSection id="how-it-works" number="04" title="How It Works" wide>
         <TomatoValidation />
       </ProjectSection>
       <ProjectSection id="challenge" number="05" title="The Challenge" {...story.challenge} />
@@ -68,13 +61,13 @@ export default function TomatoLeafPage() {
         </div>
         <p className="text-sm leading-7">This comparison illustrates the intended behavior, not a guaranteed outcome for every image. Green color alone is insufficient, and the heuristic checks can still make mistakes.</p>
       </ProjectSection>
-      <ProjectSection id="classification" number="07" title="Classification">
+      <ProjectSection id="classification" number="07" title="Classification" wide>
         <p>After validation, feature extraction uses HOG and ORB / Bag-of-Visual-Words TF-IDF. Classical machine-learning approaches were evaluated for classification into Healthy, Early Blight, or Late Blight.</p>
         <ModelMetrics metrics={project.metrics!} caption="Documented classification comparison · approximate results" />
         <p className="text-sm leading-7">These project evaluation results do not establish real-world diagnostic reliability. The application uses Python and a Streamlit interface, with SVM and ensemble approaches explored during experimentation.</p>
       </ProjectSection>
-      <ProjectSection id="learned" number="08" title="What I Learned" {...story.learned} />
-      <ProjectSection id="limitations" number="09" title="Limitations"><Limitations items={story.limitations} /></ProjectSection>
+      <ProjectSection id="limitations" number="08" title="Limitations"><Limitations items={story.limitations} /></ProjectSection>
+      <ProjectSection id="learned" number="09" title="What I Learned" {...story.learned} />
       <ProjectNavigation project={project} />
     </main>
     <Footer />

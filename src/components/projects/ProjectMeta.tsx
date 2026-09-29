@@ -8,7 +8,7 @@ export default function ProjectMeta({ project, focus }: { project: Project; focu
     { label: "Focus", value: focus },
   ];
   return (
-    <dl className={`mt-12 grid gap-7 border-t border-line pt-7 sm:grid-cols-2 lg:gap-10 ${project.teamSize ? "lg:grid-cols-[0.5fr_1.4fr_0.6fr_1.5fr]" : "lg:grid-cols-[0.5fr_1.4fr_1.5fr]"}`}>
+    <dl className={`case-meta grid gap-7 border-t border-line pt-7 sm:grid-cols-2 lg:gap-10 ${project.teamSize ? "lg:grid-cols-[0.5fr_1.4fr_0.6fr_1.5fr]" : "lg:grid-cols-[0.5fr_1.4fr_1.5fr]"}`}>
       {items.map((item) => (
         <div key={item.label}>
           <dt className="eyebrow text-secondary">{item.label}</dt>
