@@ -13,7 +13,7 @@ export default function About() {
             <p className="eyebrow">{site.name} / {site.location}</p>
           </div>
           <div className={styles.composition}>
-            <div className={styles.opening}>
+            <div className={`${styles.opening} soft-readability-zone`}>
               <h2 id="about-heading" className={styles.headline}>
                 I usually understand something only after I&apos;ve tried to <em className="editorial-emphasis">build it.</em>
               </h2>
@@ -25,7 +25,7 @@ export default function About() {
               <AboutArtifact index="02" label="Notes / sketches" caption="A page from the process, to come." variant="notes" />
             </div>
           </div>
-          <div className={styles.afterword}>
+          <div className={`${styles.afterword} soft-readability-zone`}>
             <div className={styles.marginNote}>
               <p className="eyebrow">Learning by doing</p>
               <p>{site.education.university}<br />{site.education.specialization}</p>

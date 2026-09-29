@@ -3,6 +3,7 @@
 :root {
   color-scheme: dark;
   --background: #0b0d10;
+  --background-language: #0c0f13;
   --surface: #12161c;
   --surface-elevated: #191e25;
   --foreground: #f5f5f5;
@@ -232,7 +233,7 @@ button { cursor: pointer; }
 .demo-caption { font: 8px/1.6 var(--font-geist-mono), monospace; padding: .4rem; color: var(--secondary); }
 .demo-preview.is-open { width: 70%; max-width: none; z-index: 2; }
 .visual-concept { font: 400 clamp(1.4rem, 2.1vw, 2.5rem)/1.2 var(--font-bricolage), sans-serif; letter-spacing: -.04em; max-width: 10ch; color: var(--work-accent); margin-top: -2.5rem; }
-.chapter-language { border-top: 1px solid var(--line); background: #0c0f13; }
+.chapter-language { border-top: 1px solid var(--line); background: var(--background-language); --readability-background: var(--background-language); }
 .language-visual { padding-top: .5rem; }
 .analysis-concept { font: 500 clamp(1.8rem, 3vw, 3.6rem)/1.1 var(--font-bricolage), sans-serif; letter-spacing: -.05em; margin-block: 1.5rem; }
 .language-signals { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
@@ -489,21 +490,32 @@ button { cursor: pointer; }
 .home-page .chapter-media { z-index: 2; }
 .home-page #about { position: relative; }
 .home-page #about > * { position: relative; z-index: 2; }
-/* Solid media and copy surfaces protect project text while fragments pass around edges. */
-.home-page .chapter-copy, .home-page .chapter-links { background: var(--background); }
-.home-page .chapter-language .chapter-copy, .home-page .chapter-language .chapter-links { background: #0c0f13; }
-.home-page .language-visual { background: #0c0f13; }
-.home-page .vision-visual { background: var(--background); }
+/* Local stacking contexts keep the feathered scrim above the canvas but below text.
+   Only a live desktop scene needs protection; media/artifact surfaces stay intact. */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+  .home-page[data-scene-ready="true"] :is(.chapter-copy, .chapter-links, .language-visual, .vision-visual, .contact-actions, .soft-readability-zone) {
+    position: relative;
+    isolation: isolate;
+  }
+  .home-page[data-scene-ready="true"] :is(.chapter-copy, .chapter-links, .language-visual, .vision-visual, .contact-actions, .soft-readability-zone)::before {
+    content: "";
+    position: absolute;
+    inset: -3rem -4rem;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+      color-mix(in srgb, var(--readability-background, var(--background)) 94%, transparent) 0%,
+      color-mix(in srgb, var(--readability-background, var(--background)) 80%, transparent) 35%,
+      color-mix(in srgb, var(--readability-background, var(--background)) 35%, transparent) 60%,
+      transparent 70%);
+  }
+}
 @media (prefers-reduced-motion: reduce), (forced-colors: active), print {
   .persistent-visual { display: none; }
   .home-page[data-scene-ready="true"] .hero-fallback { visibility: visible; }
 }
 
-/* Reserve a closing scroll beat so Contact can resolve before the final fade. */
+/* The ending uses normal breathing room, not a viewport-sized choreography spacer. */
 @media (min-width: 769px) {
-  .home-page #home-footer { padding-bottom: clamp(12rem, 30vh, 22rem); }
+  .home-page .site-footer { padding-bottom: clamp(5rem, 7vw, 9rem); }
 }
-
-.home-page #contact-heading, .home-page .contact-actions,
-.home-page .contact-description, .home-page #journey-heading,
-.home-page #certifications > * { background: var(--background); }

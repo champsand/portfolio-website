@@ -20,6 +20,8 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       return element ? [{ ...section, element, top:0 }] : [];
     });
     let maxScroll = 1;
+    let contactFadeStart = 0;
+    let contactFadeEnd = 1;
     const update = (scroll: number) => {
       const value = sample.current;
       value.scroll = scroll;
@@ -37,6 +39,14 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       const hold = current.state === "contact" ? .7 : current.state === "credentials" ? .15 : .4;
       const transition = Math.max(0, (progress - hold) / (1 - hold));
       value.mix = transition * transition * (3 - 2 * transition);
+      if (current.state === "contact" || current.state === "footer") {
+        // A compact ending may share a viewport with Contact. Reaching the page
+        // end alone must not ghost the sculpture while the reader is still here.
+        const closing = Math.max(0, Math.min(1, (scroll - contactFadeStart) / Math.max(1, contactFadeEnd - contactFadeStart)));
+        value.from = "contact";
+        value.to = "footer";
+        value.mix = closing * closing * (3 - 2 * closing);
+      }
       onChange(value);
     };
     const measure = () => {
@@ -58,6 +68,13 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       if (hero) value.hero = { x:hero.left + hero.width / 2, y:hero.top + window.scrollY + hero.height / 2, height:hero.height, bottom:(heroSection?.bottom ?? hero.bottom) + window.scrollY };
       const contact = document.querySelector(".contact-composition")?.getBoundingClientRect();
       const heading = document.getElementById("contact-heading")?.getBoundingClientRect();
+      const actions = document.querySelector(".contact-actions")?.getBoundingClientRect();
+      if (contact && actions) {
+        // Content-relative thresholds need no spacer or arbitrary page pixels.
+        // On tall screens the complete fade may lie beyond available scrolling.
+        contactFadeStart = actions.bottom + window.scrollY - value.height * .95;
+        contactFadeEnd = Math.max(maxScroll, actions.bottom + window.scrollY - value.height * .15);
+      }
       if (contact && heading) value.contact = { x:contact.left + contact.width * .76, y:heading.top + window.scrollY + heading.height / 2, height:heading.height * 1.6 };
       update(window.scrollY);
     };

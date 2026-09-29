@@ -52,7 +52,7 @@
   .workspace, .notes { transform: none; }
 }
 
-/* The reading surfaces stay opaque; the open artifact field reveals the scene. */
-.opening, .afterword { position: relative; background: var(--background); }
+/* The artifact cards remain intentional paper surfaces. */
+.opening, .afterword { position: relative; }
 .artifact .reserved, .artifact figcaption { color: var(--paper-muted); }
 .pageEnd { border-color: var(--line); }
