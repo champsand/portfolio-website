@@ -7,7 +7,7 @@ export default function Certifications() {
   return (
     <section id="certifications" aria-labelledby="certifications-heading" className="credentials-section">
       <Container>
-        <div className="credentials-heading"><p className="eyebrow closing-label">07 / Credentials</p><h2 id="certifications-heading">Continuing to learn.</h2></div>
+        <div className="credentials-heading"><p className="eyebrow closing-label">07 / Credentials</p><h2 id="certifications-heading">Coursework & certifications.</h2></div>
         <div className="credential-columns eyebrow" aria-hidden="true"><span>Year</span><span>Issuer</span><span>Certification</span><span>Record</span></div>
         <ul className="credential-list">
           {certifications.map((certificate) => (

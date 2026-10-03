@@ -15,7 +15,7 @@ export default function CVPage() {
       <Container className="py-16 md:py-24">
         <p className="eyebrow text-accent">CV</p>
         <h1 className="mt-5 text-5xl font-medium leading-tight tracking-[-0.055em] md:text-7xl">{site.name}</h1>
-        <p className="mt-6 max-w-[660px] text-lg leading-8 text-secondary">Computer Science undergraduate specializing in Intelligent Systems, with interests in software development, data, and applied AI.</p>
+        <p className="mt-6 max-w-[660px] text-lg leading-8 text-secondary">I&apos;m studying Computer Science at BINUS University, specializing in Intelligent Systems. My interests span product thinking, data, AI, backend development, and software engineering.</p>
         <div className="mt-8 flex flex-wrap gap-4">
           <ExternalLink href={site.cv.pdf} className="button-primary">Open PDF<ArrowUpRight size={17} aria-hidden="true" /></ExternalLink>
           <a href={site.cv.pdf} download="Matthew-Sutiono-CV.pdf" className="button-secondary">Download PDF<Download size={17} aria-hidden="true" /></a>

@@ -28,7 +28,7 @@ export default function HateSpeechPage() {
       <ProjectSection id="how-it-works" number="04" title="How It Works" wide>
         <HateSpeechAnalysis />
         <p>Preprocessing includes lowercasing and cleanup, URL and mention handling, common character normalization, slang normalization, and stopword handling.</p>
-        <p>The current deployed detector primarily uses fine-tuned IndoBERT. The abusive-language lexicon independently checks processed terms and short phrases.</p>
+        <p>We use fine-tuned IndoBERT for the risk prediction. Separately, the abusive-language lexicon checks processed terms and short phrases, so a model label doesn&apos;t hide a potentially abusive expression.</p>
         <p className="text-sm leading-7">Built in Python with a Streamlit interface. Resources include an Indonesian text dataset, a slang normalization dictionary, and an abusive-language lexicon.</p>
         {project.repositoryUrl && <ExternalLink href={project.repositoryUrl} className="text-link">Hugging Face repository</ExternalLink>}
       </ProjectSection>
@@ -51,7 +51,7 @@ export default function HateSpeechPage() {
         <p>The interface may show an “Abusive / Profane” state when the model does not strongly predict hate speech but lexicon matches are present. This is a presentation of two analysis layers, not a third model class.</p>
       </ProjectSection>
       <ProjectSection id="experimentation" number="07" title="Model Experimentation" wide>
-        <p>We compared IndoBERT, Logistic Regression, SVM, and Naive Bayes. IndoBERT provided the strongest documented accuracy among these experiments.</p>
+        <p>We compared IndoBERT, Logistic Regression, SVM, and Naive Bayes. IndoBERT had the highest documented accuracy at 86.41%. I use that number to describe the model experiment, rather than the reliability of an entire moderation system.</p>
         <ModelMetrics metrics={project.metrics!} caption="Documented model comparison · accuracy" />
         <p className="text-sm leading-7">The additional models were used for comparison and experimentation. The live prediction is primarily from IndoBERT, not an ensemble of all four models.</p>
       </ProjectSection>

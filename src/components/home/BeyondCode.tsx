@@ -39,9 +39,9 @@ export default function BeyondCode() {
           </div>
         </article>
         <div className="supporting-activities">
-          {communities.map((activity, index) => (
+          {communities.map((activity) => (
             <article key={activity.title} className="supporting-activity">
-              <p className="eyebrow text-secondary">{index === 0 ? "Academic" : "Community"}</p>
+              <p className="eyebrow text-secondary">Community</p>
               <div><h3>{activity.title}</h3><p className="activity-meta">{activity.metadata}</p></div>
               <p className="activity-description">{activity.description}</p>
             </article>

@@ -62,9 +62,9 @@ export default function TomatoLeafPage() {
         <p className="text-sm leading-7">This comparison illustrates the intended behavior, not a guaranteed outcome for every image. Green color alone is insufficient, and the heuristic checks can still make mistakes.</p>
       </ProjectSection>
       <ProjectSection id="classification" number="07" title="Classification" wide>
-        <p>After validation, feature extraction uses HOG and ORB / Bag-of-Visual-Words TF-IDF. Classical machine-learning approaches were evaluated for classification into Healthy, Early Blight, or Late Blight.</p>
+        <p>The team&apos;s classification pipeline uses HOG and ORB / Bag-of-Visual-Words TF-IDF after validation. We evaluated classical machine-learning approaches, including soft voting, for Healthy, Early Blight, and Late Blight.</p>
         <ModelMetrics metrics={project.metrics!} caption="Documented classification comparison · approximate results" />
-        <p className="text-sm leading-7">These project evaluation results do not establish real-world diagnostic reliability. The application uses Python and a Streamlit interface, with SVM and ensemble approaches explored during experimentation.</p>
+        <p className="text-sm leading-7">These scores describe classification experiments, not the accuracy of my validation checks or real-world diagnostic reliability. The application uses Python and Streamlit, with SVM and ensemble approaches explored by the team.</p>
       </ProjectSection>
       <ProjectSection id="limitations" number="08" title="Limitations"><Limitations items={story.limitations} /></ProjectSection>
       <ProjectSection id="learned" number="09" title="What I Learned" {...story.learned} />
