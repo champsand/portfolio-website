@@ -548,12 +548,6 @@ button { cursor: pointer; }
 .case-image-caption .text-link { min-height: 44px; font-size: 10px; }
 .case-motif { color: var(--case-accent, #b7abc3); }
 .case-motif svg { display: block; width: 100%; stroke: currentColor; stroke-width: 1; }
-.case-signal-labels { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
-.case-signal-labels > div { border-top: 1px solid var(--line); padding-top: 1rem; }
-.case-signal-labels p { font-size: 18px; color: var(--foreground); }
-.case-signal-labels span, .case-gate-labels span { display: block; margin-top: .6rem; font: 10px/1.8 var(--font-geist-mono), monospace; color: var(--secondary); }
-.case-gate-labels { font: 11px/2 var(--font-geist-mono), monospace; text-align: center; }
-.case-gate-labels p + p { margin-top: .5rem; color: var(--secondary); }
 .case-section { padding-block: var(--section-space); border-top: 1px solid var(--line); }
 .case-section-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: clamp(2rem, 6vw, 7rem); }
 .case-section-heading h2 { margin-top: 1rem; max-width: 15ch; font-size: clamp(1.8rem, 2.8vw, 3rem); line-height: 1.1; font-weight: 500; letter-spacing: -.045em; }
@@ -612,7 +606,7 @@ button { cursor: pointer; }
   .case-hero-composition, .case-hero-product .case-hero-composition { grid-template-columns: 1fr; min-height: 0; }
   .case-hero-copy h1 { max-width: 17ch; font-size: clamp(3.4rem, 7vw, 6rem); }
   .case-hero-product h1 { max-width: none; }
-  .case-hero-composition > .case-motif { max-width: 620px; width: 100%; justify-self: center; }
+  .case-hero-composition > .case-diagram-reveal { max-width: 560px; width: 100%; justify-self: center; }
   .case-product-stage { padding-block: 1rem; }
   .case-section-grid { grid-template-columns: 1fr; gap: 2rem; }
   .case-prose { width: 100%; margin-inline: auto; }
@@ -629,8 +623,6 @@ button { cursor: pointer; }
   .case-description { font-size: 14px; }
   .case-product-line { inset: 0 .6rem 3rem -.4rem; transform: rotate(-3deg); }
   .case-hero-evidence { padding-top: 2.5rem; }
-  .case-signal-labels { gap: 1rem; }
-  .case-signal-labels p { font-size: 15px; }
   .case-prose { font-size: 16px; line-height: 1.85; }
   .case-section-wide .case-section-heading { display: block; }
   .case-section-wide .case-section-heading h2 { margin-top: 1rem; }
@@ -646,4 +638,73 @@ button { cursor: pointer; }
   .case-next-title { font-size: clamp(2.5rem, 10vw, 4rem); gap: .8rem; }
   .case-next .case-motif { position: static; width: 65%; margin-left: auto; margin-top: 1rem; }
   .case-navigation { padding-bottom: 0; }
+}
+
+/* Stage 8.1: a shared input, separate signals, and an intentional rejection. */
+.case-language { --case-accent: #c5b6db; }
+.case-diagram-reveal { min-width: 0; width: 100%; }
+.motif-drawing { position: relative; }
+.case-motif .motif-mobile { display: none; }
+.case-motif svg { stroke-width: 1.25; }
+
+.motif-input, .motif-validation { position: absolute; font: 11px/1.6 var(--font-geist-mono), monospace; }
+.motif-language .motif-input { top: 7%; left: 0; width: 100%; text-align: center; }
+.motif-signals { position: absolute; top: 73%; inset-inline: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; text-align: center; }
+.motif-signals p, .motif-accept p, .motif-reject p { color: var(--foreground); font-size: clamp(15px, 1.2vw, 20px); line-height: 1.4; }
+.motif-signals span, .motif-accept span, .motif-reject span, .motif-note { display: block; margin-top: .5rem; font: 10px/1.8 var(--font-geist-mono), monospace; color: var(--secondary); }
+.motif-vision .motif-input { top: 34%; left: 0; }
+.motif-validation { top: 56%; left: 22%; width: 35%; text-align: center; }
+.motif-accept, .motif-reject { position: absolute; left: 61%; right: 0; }
+.motif-accept { top: 5%; }
+.motif-reject { top: 76%; }
+.motif-accept span { color: var(--case-accent); }
+.motif-reject span, .diagram-reject { color: #c5b6db; }
+.motif-note { margin-top: 1.5rem; max-width: 48ch; border-top: 1px solid var(--line); padding-top: 1rem; }
+.case-motif .diagram-reject { stroke: #c5b6db; }
+.case-motif .diagram-decision { stroke-width: 1.7; }
+.case-hero-evidence { position: relative; }
+.case-hero-evidence::before { content: ""; display: block; height: 2rem; width: 1px; background: var(--case-accent); opacity: .5; position: absolute; top: 0; left: 50%; }
+.case-section-heading > .eyebrow::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: .75rem; border: 1px solid currentColor; vertical-align: 1px; }
+.case-language .case-section-heading > .eyebrow::before { border-radius: 50%; }
+.case-vision .case-section-heading > .eyebrow::before { transform: rotate(45deg); }
+.case-analysis > div:nth-child(2) > div, .case-validation > div:nth-of-type(2) > div { position: relative; }
+.case-analysis > div:nth-child(2) > div::before { content: ""; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; background: var(--background); border: 1px solid var(--case-accent); border-radius: 50%; }
+.case-analysis > div:nth-child(2) > div:last-child::before { border-radius: 0; border-color: var(--secondary); }
+.case-validation > div:nth-of-type(2) > div:first-child { border-color: #c5b6db; padding-left: 1.25rem; background: linear-gradient(120deg, #c5b6db09, transparent); }
+.case-validation > div:nth-of-type(2) > div:first-child > p:first-child { color: #c5b6db; }
+.case-next:focus-visible .case-next-title { color: var(--case-accent); }
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] .diagram-input { animation: case-node-in 200ms ease-out both; }
+  [data-reveal] .diagram-trunk { stroke-dasharray: 1; animation: case-line-in 250ms 120ms ease-out both; }
+  [data-reveal] .diagram-decision { animation: case-node-in 200ms 300ms ease-out both; }
+  [data-reveal] .diagram-branch { stroke-dasharray: 1; animation: case-line-in 380ms 380ms ease-out both; }
+  [data-reveal] .diagram-endpoints { animation: case-node-in 200ms 650ms ease-out both; }
+  [data-reveal] .diagram-labels { animation: case-label-in 250ms 750ms ease-out both; }
+  .case-product-stage[data-reveal] figure { animation: case-product-in 700ms var(--ease-out) both; }
+  [data-reveal="pending"] :is(.diagram-input, .diagram-trunk, .diagram-decision, .diagram-branch, .diagram-endpoints, .diagram-labels), .case-product-stage[data-reveal="pending"] figure { animation-play-state: paused; }
+  .case-next-title { transition: color 200ms, transform 250ms var(--ease-out); }
+  .case-next:is(:hover, :focus-visible) .case-next-title { transform: translateX(3px); }
+  .case-next:focus-visible .case-next-title svg { transform: translate(5px, -5px); }
+}
+@keyframes case-node-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes case-line-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes case-label-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes case-product-in { from { transform: translateY(8px); } to { transform: none; } }
+@media (max-width: 1099px) {
+  .case-diagram-reveal { max-width: 560px; justify-self: center; }
+}
+@media (max-width: 600px) {
+  .case-diagram-reveal { max-width: 360px; }
+  .case-motif:not(.motif-preview) .motif-desktop { display: none; }
+  .case-motif:not(.motif-preview) .motif-mobile { display: block; }
+  .motif-language .motif-input, .motif-vision .motif-input { top: 7%; left: 18%; width: auto; text-align: left; }
+  .motif-signals { top: 44%; bottom: auto; height: 66%; left: 25%; right: 0; grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; gap: 0; text-align: left; }
+  .motif-signals p, .motif-accept p, .motif-reject p { font-size: 18px; }
+  .motif-signals span { max-width: 25ch; }
+  .motif-validation { top: 33%; left: 18%; width: auto; text-align: left; }
+  .motif-accept, .motif-reject { left: 25%; top: 54%; }
+  .motif-reject { top: 79%; }
+  .motif-note { margin-top: 1rem; }
+  .case-analysis > div:nth-child(2), .case-validation > div:nth-of-type(2) { gap: 2.5rem; }
+  .case-next .case-motif { width: 48%; margin-top: 0; }
 }

@@ -4,6 +4,7 @@ import ProjectMeta from "./ProjectMeta";
 import ProjectLinks from "./ProjectLinks";
 import ProjectImage from "./ProjectImage";
 import ProjectMotif from "./ProjectMotif";
+import DiagramReveal from "./DiagramReveal";
 import { projects } from "@/data/projects";
 import type { Project } from "@/types/portfolio";
 
@@ -21,10 +22,10 @@ export default function ProjectHero({ project, focus }: { project: Project; focu
           <p className="case-description">{project.description}</p>
           <ProjectLinks project={project} />
         </div>
-        {kind === "product" ? <div className="case-product-stage">
+        {kind === "product" ? <DiagramReveal className="case-product-stage">
           <div className="case-product-line" aria-hidden="true" />
           <ProjectImage src={project.image} alt={project.imageAlt} width={1600} height={794} eager caption="01 / DASHBOARD — WEEKLY PROGRESS & DAILY REFLECTION" />
-        </div> : <ProjectMotif project={project} />}
+        </DiagramReveal> : <ProjectMotif project={project} />}
       </div>
       <ProjectMeta project={project} focus={focus} />
     </div>
