@@ -1,7 +1,7 @@
 import { ArrowDown, CornerDownRight } from "lucide-react";
 
 export default function TomatoValidation() {
-  return <figure aria-label="Validation before disease classification" className="rounded-sm border border-line bg-surface p-5 text-sm leading-6 sm:p-8">
+  return <figure aria-label="Validation before disease classification" className="case-validation">
     <p className="font-medium text-foreground">User Upload</p>
     <ArrowDown className="my-4" size={18} aria-hidden="true" />
     <div className="border-l-2 border-accent pl-5">

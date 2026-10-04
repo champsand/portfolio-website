@@ -1,3 +1,4 @@
+import PersistentVisualSystem from "@/components/visual/PersistentVisualSystem";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/home/Hero";
@@ -15,21 +16,22 @@ export const metadata = { ...pageMetadata("Matthew Sutiono", siteDescription, "/
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
+      <PersistentVisualSystem />
       <a href="#main-content" className="skip-link">Skip to content</a>
       <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <Currently />
-        <About />
         <Projects />
+        <About />
         <Skills />
         <Journey />
         <BeyondCode />
         <Certifications />
         <Contact />
       </main>
-      <Footer />
-    </>
+      <div id="home-footer"><Footer /></div>
+    </div>
   );
 }

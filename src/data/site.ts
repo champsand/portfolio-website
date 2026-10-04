@@ -17,37 +17,43 @@ export const site: SiteIdentity = {
 export const github = site.socials.find((link) => link.label === "GitHub")!;
 
 export const navigation = [
-  { label: "About", href: "#about" },
   { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
   { label: "Journey", href: "#journey" },
-  { label: "Beyond Code", href: "#beyond-code" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const hero = {
-  eyebrow: "Computer Science · Intelligent Systems",
-  heading: "I like learning by building things.",
-  description: "I'm Matthew, a Computer Science undergraduate at BINUS University specializing in Intelligent Systems. I enjoy exploring software, data, applied AI, and turning things I learn into something people can actually use.",
-  metadata: "Jakarta, Indonesia · Computer Science · Intelligent Systems",
+  eyebrow: "CS / Intelligent Systems · Jakarta",
+  firstName: "Matthew",
+  lastName: "Sutiono",
+  description: "I make progress by keeping at it.",
+  supportingCopy: "I'm a Computer Science undergraduate specializing in Intelligent Systems. Real projects teach me what theory leaves open: how data, AI, and code become useful products, and how people make them better.",
+  index: "01",
+  concepts: ["Ideas", "Data", "Code", "People"],
+  scrollLabel: "Scroll to explore",
 };
 
 export const currently: CurrentEntry[] = [
-  { number: "01", title: "Studying Computer Science", detail: "BINUS University · Intelligent Systems" },
-  { number: "02", title: "Building & experimenting", detail: "Software · Data · Applied AI" },
-  { number: "03", title: "Learning", detail: "Backend development · APIs · Software engineering" },
-  { number: "04", title: "Looking for", detail: "Opportunities to learn, build, and collaborate" },
+  { number: "01", title: "Studying", detail: "Computer Science · Intelligent Systems" },
+  { number: "02", title: "Exploring", detail: "Deep Learning · Data · Applied AI" },
+  { number: "03", title: "Growing", detail: "Communication · Leadership · Product Thinking" },
+  { number: "04", title: "Looking for", detail: "Internships where I can learn, contribute, and work closely with people" },
 ];
 
+export const projectsIntro = { opening: "Ideas become decisions", closing: "when I try to build them." };
+export const aboutHeading = { opening: "I like a clear plan, and room to", emphasis: "rethink it." };
 export const about = [
-  "I've been curious about computers and technology for as long as I can remember. Studying Computer Science gave me a way to turn that curiosity into something more practical, learning how ideas become software, how data can be used to solve problems, and how technology can help people.",
-  "Most of what I've learned has come from building projects with other people. I've explored full-stack development, machine learning, NLP, and computer vision, while also learning that good technology isn't only about making something work, it is about understanding the problem, the people using it, and the decisions behind it.",
-  "I'm still learning, and that's part of what I enjoy most.",
+  "Watching Iron Man as a kid left me wondering how technology could extend what ordinary people can do. Studying Computer Science hasn't always been easy, but I want to understand the technology changing our lives. I chose Intelligent Systems to understand AI beyond just using it.",
+  "I learn through projects and conversation. A working implementation exposes edge cases that a neat explanation can miss; talking an idea through helps me see where my understanding stops. I use AI as a tool, while learning enough to question its output and make my own decisions.",
+  "In group projects, I often take the lead because I enjoy turning deadlines into a plan, dividing work early, and listening to everyone's ideas. I also try to protect my attention: I usually leave my phone outside my room, so getting started depends less on willpower.",
+  "My range is growing. Now I want to give that range more depth.",
 ];
 
 export const skills: SkillGroup[] = [
-  { name: "Software", items: ["Python", "JavaScript", "C", "C++", "React", "Next.js", "HTML", "CSS", "Git", "GitHub"] },
-  { name: "Data & AI", items: ["Pandas", "NumPy", "Machine Learning", "NLP", "Computer Vision", "LLM / AI APIs"] },
-  { name: "Databases", items: ["SQL", "MySQL", "PostgreSQL"] },
+  { name: "Software", items: ["Python", "TypeScript", "JavaScript", "C", "C++", "Node.js", "Express", "React", "Next.js", "HTML", "CSS", "Git", "GitHub"] },
+  { name: "Data & AI", items: ["Pandas", "NumPy", "Scikit-learn", "Machine Learning", "NLP", "Computer Vision", "LLM / AI APIs"] },
+  { name: "Databases", items: ["SQL", "MySQL", "PostgreSQL", "Prisma"] },
 ];
-export const currentlyLearning = "Backend engineering, APIs, system design, and software development practices.";
-export const contact = { heading: "Let's build something.", description: "I'm always interested in learning something new, collaborating with others, and turning ideas into useful things." };
+export const currentlyLearning = "Python is the language I return to most. I'm comfortable with databases and backend work, and I'm going deeper into data and machine learning.";
+export const contact = { heading: "Good ideas get better when they're shared.", description: "I'd like to hear what you're working on, talk through a product or technology question, or exchange perspectives. I'm also open to internships where I can contribute and learn alongside a team." };

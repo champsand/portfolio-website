@@ -3,9 +3,9 @@ import { currently } from "@/data/site";
 
 export default function Currently() {
   return (
-    <section aria-labelledby="currently-heading" className="border-y border-line bg-surface/40 py-12 md:py-14">
+    <section id="currently" aria-labelledby="currently-heading" className="border-y border-line py-8 md:py-10">
       <Container>
-        <h2 id="currently-heading" className="eyebrow mb-8 text-secondary">Currently</h2>
+        <h2 id="currently-heading" className="eyebrow mb-6 text-secondary">Currently</h2>
         <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0">
           {currently.map((entry) => (
             <li key={entry.number} className="border-t border-line pt-5 lg:border-t-0 lg:border-l lg:px-7 lg:pt-0 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0">

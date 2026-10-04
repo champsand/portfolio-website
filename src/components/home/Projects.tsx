@@ -1,21 +1,19 @@
-import Container from "@/components/layout/Container";
-import SectionHeading from "@/components/ui/SectionHeading";
-import ProjectCard from "./ProjectCard";
 import { projects } from "@/data/projects";
+import { projectsIntro } from "@/data/site";
+import ProjectChapter from "./projects/ProjectChapter";
+import ProjectProgress from "./projects/ProjectProgress";
 
 export default function Projects() {
-  const [featured, ...secondary] = projects;
   return (
-    <section id="work" aria-labelledby="work-heading" className="section-space border-t border-line">
-      <Container>
-        <div className="mb-12 max-w-[720px] md:mb-16">
-          <SectionHeading label="Selected Work" title="Things I've built, explored, and learned from." id="work-heading" />
-        </div>
-        <ProjectCard project={featured} number="01" featured />
-        <div className="mt-14 grid gap-14 border-t border-line pt-14 md:grid-cols-2 md:gap-12 lg:mt-20 lg:pt-16">
-          {secondary.map((project, index) => <ProjectCard key={project.slug} project={project} number={String(index + 2).padStart(2, "0")} />)}
-        </div>
-      </Container>
+    <section id="work" aria-labelledby="work-heading" className="selected-work">
+      <div className="work-shell work-intro">
+        <div className="work-intro-index"><p className="eyebrow text-accent">Selected Work</p><p className="eyebrow text-secondary">{String(projects.length).padStart(2, "0")} projects / Built to learn</p></div>
+        <h2 id="work-heading">{projectsIntro.opening}<br />{projectsIntro.closing}</h2>
+      </div>
+      <div className="work-chapters">
+        <ProjectProgress items={projects.map(({ slug, showcase }) => ({ slug, title: showcase.shortTitle }))} />
+        {projects.map((project, index) => <ProjectChapter key={project.slug} project={project} number={String(index + 1).padStart(2, "0")} />)}
+      </div>
     </section>
   );
 }

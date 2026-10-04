@@ -14,6 +14,15 @@ export interface SiteIdentity {
 }
 
 export interface Project {
+  showcase: {
+    kind: "product" | "language" | "vision";
+    label: string;
+    shortTitle: string;
+    concept: string;
+    signals?: { label: string; detail: string }[];
+    pipeline?: { input: string; validation: string; accepted: string; rejected: string; note: string };
+    demo?: { src: string; poster: string; description: string };
+  };
   slug: string;
   caseStudyHref?: string;
   technologyGroups?: SkillGroup[];
