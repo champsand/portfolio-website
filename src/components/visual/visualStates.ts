@@ -9,6 +9,21 @@ const scattered = assembly.map(([x,y,z]): Point => [x * 1.4, y * 1.25, z * .6]);
 const dual = assembly.map(([,y,z], i): Point => [(i < 6 ? -1 : 1) * (2 + i % 3 * .4), y * .9, z * 1.2]);
 const path = assembly.map(([, ,z], i): Point => [-2.2 + (i % 6) * .85, i < 6 ? .25 : (i === 10 ? -1.3 : -.4), z * .3]);
 const chronology = assembly.map(([, ,z], i): Point => [i < 6 ? 1.35 : -.8, 2.6 - (i % 6) * 1.05, z * .25]);
+// Final topology follows five primary rim vertices, a short bridge, and one
+// companion face. Earlier narrative states retain their original link layout.
+export const settledLinks = [[0,1],[1,2],[2,3],[3,4],[4,0],[2,5],[5,6],[6,7],[7,5],[0,0],[0,0],[0,0]];
+const golden = (1 + Math.sqrt(5)) / 2;
+const primaryRadius = 1.36 / Math.hypot(1,golden);
+export const settledAnchors: { form:"primary"|"companion"; vertex:Point }[] = [
+  {form:"primary",vertex:[-primaryRadius,golden*primaryRadius,0]},
+  {form:"primary",vertex:[primaryRadius,golden*primaryRadius,0]},
+  {form:"primary",vertex:[golden*primaryRadius,0,primaryRadius]},
+  {form:"primary",vertex:[0,-primaryRadius,golden*primaryRadius]},
+  {form:"primary",vertex:[-golden*primaryRadius,0,primaryRadius]},
+  {form:"companion",vertex:[.7,0,0]},
+  {form:"companion",vertex:[0,0,.7]},
+  {form:"companion",vertex:[0,-.7,0]},
+];
 
 export type VisualTarget = {
   x: number; y: number; scale: number; rotation: Point;
@@ -17,9 +32,10 @@ export type VisualTarget = {
   nodeCount: number; depth: number; primaryScale: number; secondaryScale: number; surface: number;
   corePosition: Point; foregroundPosition: Point; rearPosition: Point;
   orbitScale: Point; edges: number[];
+  rearScale: number;
 };
 const base: VisualTarget = { x: .72, y: .48, scale: 1, rotation: [.15,-.35,-.2], opacity: 1, forms: 1, lines: 1, orbits: 1, spread: 0, pointer: 1, idle: 1, nodes: assembly,
-  nodeCount:12, depth:1, primaryScale:1, secondaryScale:1, surface:1, corePosition:[0,0,0], foregroundPosition:[0,0,0], rearPosition:[0,0,0], orbitScale:[1,1,1], edges:links.map(() => 1) };
+  nodeCount:12, depth:1, primaryScale:1, secondaryScale:1, rearScale:1, surface:1, corePosition:[0,0,0], foregroundPosition:[0,0,0], rearPosition:[0,0,0], orbitScale:[1,1,1], edges:links.map(() => 1) };
 const state = (target: Partial<VisualTarget>): VisualTarget => ({ ...base, ...target });
 
 // Viewport fractions position the assembly. All narrative targets live here.
@@ -36,7 +52,7 @@ export const visualStates = {
   beyond: state({ nodeCount:4, x:.92, y:.5, scale:1.18, opacity:.26, forms:.3, surface:0, lines:.4, orbits:.4, spread:1.8, depth:.6, corePosition:[1.5,0,-1], orbitScale:[1.5,1.3,1], pointer:.03, idle:.08, nodes:scattered }),
   credentials: state({ nodeCount:4, x:.78, y:.45, scale:.85, opacity:.18, forms:.12, surface:.1, lines:.4, orbits:0, spread:1.8, depth:.4, corePosition:[1,0,-1.8], pointer:0, idle:.04, nodes:scattered }),
   contact: state({ x:.76, y:.42, scale:1.02, rotation:[.25,-.65,.2], opacity:.88, forms:1, surface:.75, lines:1.15, orbits:.45, spread:.2, depth:1.35, primaryScale:1.15, secondaryScale:.85, corePosition:[.45,.4,0], foregroundPosition:[.4,.8,0], rearPosition:[.25,.3,0], orbitScale:[1.1,.75,1], nodes:assembly.map(([x,y,z]): Point => [x,y + .65,z]), pointer:.15, idle:.25 }),
-  footer: state({ nodeCount:7, x:.76, y:.42, scale:.94, rotation:[.25,-.65,.2], opacity:.44, forms:.85, surface:.65, lines:.9, orbits:.25, spread:.35, depth:1.1, primaryScale:1.15, secondaryScale:.85, corePosition:[.45,.4,0], foregroundPosition:[.4,.8,0], rearPosition:[.25,.3,0], orbitScale:[1.1,.75,1], nodes:assembly.map(([x,y,z]): Point => [x,y + .65,z]), pointer:0, idle:.06 }),
+  footer: state({ nodeCount:8, x:.74, y:.42, scale:.9348, rotation:[.25,-.65,.2], opacity:.48, forms:1, surface:.8, lines:.6, orbits:.06, spread:0, depth:1, primaryScale:1.15, secondaryScale:.85, rearScale:0, corePosition:[.15,.4,0], foregroundPosition:[.4,.7,.06], rearPosition:[.25,.3,0], orbitScale:[.82,.6,.8], edges:[1,1,1,1,1,1,1,1,1,0,0,0], pointer:0, idle:.06 }),
 };
 export type VisualState = keyof typeof visualStates;
 export const sections: { id: string; state: VisualState }[] = [

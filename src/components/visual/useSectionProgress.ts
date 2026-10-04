@@ -20,8 +20,8 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       return element ? [{ ...section, element, top:0 }] : [];
     });
     let maxScroll = 1;
-    let contactFadeStart = 0;
-    let contactFadeEnd = 1;
+    let contactResolveStart = 0;
+    let contactResolveEnd = 1;
     const update = (scroll: number) => {
       const value = sample.current;
       value.scroll = scroll;
@@ -40,9 +40,8 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       const transition = Math.max(0, (progress - hold) / (1 - hold));
       value.mix = transition * transition * (3 - 2 * transition);
       if (current.state === "contact" || current.state === "footer") {
-        // A compact ending may share a viewport with Contact. Reaching the page
-        // end alone must not ghost the sculpture while the reader is still here.
-        const closing = Math.max(0, Math.min(1, (scroll - contactFadeStart) / Math.max(1, contactFadeEnd - contactFadeStart)));
+        // Finish early and hold the Contact sculpture through the Footer.
+        const closing = Math.max(0, Math.min(1, (scroll - contactResolveStart) / Math.max(1, contactResolveEnd - contactResolveStart)));
         value.from = "contact";
         value.to = "footer";
         value.mix = closing * closing * (3 - 2 * closing);
@@ -69,11 +68,12 @@ export function useSectionProgress(onChange: (sample: ScrollSample) => void) {
       const contact = document.querySelector(".contact-composition")?.getBoundingClientRect();
       const heading = document.getElementById("contact-heading")?.getBoundingClientRect();
       const actions = document.querySelector(".contact-actions")?.getBoundingClientRect();
-      if (contact && actions) {
-        // Content-relative thresholds need no spacer or arbitrary page pixels.
-        // End with a partial assembly; never add scroll distance to finish a fade.
-        contactFadeStart = actions.bottom + window.scrollY - value.height * .95;
-        contactFadeEnd = maxScroll;
+      const contactEntry = elements.find(entry => entry.state === "contact");
+      if (contact && actions && contactEntry) {
+        // Retain the full Contact arrival, resolve at .65–.88, then rest.
+        const interval = maxScroll - contactEntry.top;
+        contactResolveStart = contactEntry.top + interval * .65;
+        contactResolveEnd = contactEntry.top + interval * .88;
       }
       if (contact && heading) value.contact = { x:contact.left + contact.width * .76, y:heading.top + window.scrollY + heading.height / 2, height:heading.height * 1.6 };
       update(window.scrollY);
