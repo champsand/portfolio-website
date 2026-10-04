@@ -20,9 +20,14 @@ export default function About() {
               <p className={styles.body}>{about[0]}</p>
             </div>
             <div className={styles.artifacts}>
-              {/* TODO: Replace these slots with real workspace and notebook imagery. */}
-              <AboutArtifact index="01" label="Workspace" caption="A place for a real process photo." variant="workspace" />
-              <AboutArtifact index="02" label="Notes / sketches" caption="A page from the process, to come." variant="notes" />
+              <AboutArtifact
+                index="01"
+                label="DJI Indonesia / 2024"
+                caption="A team I learned from."
+                variant="team"
+                image={{ src: "/images/artifacts/dji-team-2024.jpg", alt: "Matthew with colleagues during his time at DJI Indonesia." }}
+              />
+              <AboutArtifact index="02" label="How I work" variant="principles" />
             </div>
           </div>
           <div className={`${styles.afterword} soft-readability-zone`}>

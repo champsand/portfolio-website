@@ -11,20 +11,17 @@
 .opening > .body { margin-top: 2.5rem; }
 .artifacts { position: relative; padding: 1.5rem 1rem 0 1rem; align-self: start; }
 .artifact { color-scheme: light; color: var(--ink); box-shadow: 0 18px 50px color-mix(in srgb, var(--background) 65%, transparent); position: relative; background: var(--paper-raised); padding: .65rem; border: 1px solid var(--paper-line); }
-.workspace { width: 90%; transform: rotate(-1.5deg); }
-.notes { width: 64%; margin: 1.25rem 0 0 auto; transform: rotate(1.5deg); }
+.team { width: 90%; transform: rotate(-1.5deg); }
+.principles { width: 64%; margin: 1.25rem 0 0 auto; transform: rotate(1.5deg); }
+.artifactIndex { border-bottom: 1px solid var(--paper-line); padding: .2rem .35rem .65rem; margin-bottom: .65rem; font: 9px/1.7 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .06em; color: var(--paper-muted); }
 .artifactVisual { position: relative; overflow: hidden; aspect-ratio: 1.2; background: var(--paper-shade); }
-.notes .artifactVisual { aspect-ratio: 1.2; background: var(--paper-raised); }
-.image { object-fit: cover; }
-.slotLabel { position: absolute; inset: auto 1.4rem 1.5rem; }
-.slotLabel p { margin-top: .4rem; font: italic 32px/1.1 var(--font-instrument-serif), serif; }
-.reserved { display: block; font-size: 11px; line-height: 1.6; margin-top: .75rem; color: var(--secondary); }
-.geometry { position: absolute; inset: 0; pointer-events: none; }
-.workspace .geometry span { position: absolute; border: 1px solid var(--paper-line); width: 78%; aspect-ratio: 1; border-radius: 50%; top: -28%; right: -12%; }
-.workspace .geometry span:nth-child(2) { right: 4%; }
-.workspace .geometry span:nth-child(3) { right: 20%; }
-.notes .geometry { inset: 1rem 1rem auto; height: 25%; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); }
-.notes .geometry::after { content: ''; position: absolute; height: 100%; width: 1px; left: 20%; background: var(--paper-line); }
+.team .artifactVisual { aspect-ratio: 1; }
+.principles .artifactVisual { display: grid; align-items: center; padding: clamp(.75rem, 2vw, 1.5rem); background: var(--paper-raised); }
+.image { object-fit: cover; object-position: center bottom; }
+.principleList { list-style: none; }
+.principleList li { display: flex; align-items: baseline; gap: 1rem; padding-block: .5rem; font: 400 clamp(1.25rem, 2vw, 1.65rem)/1.2 var(--font-bricolage), sans-serif; letter-spacing: -.035em; }
+.principleList li + li { border-top: 1px solid var(--paper-line); }
+.principleList li > span { font: 9px/1.7 var(--font-geist-mono), monospace; color: var(--paper-accent); letter-spacing: .06em; }
 .artifact figcaption { display: flex; flex-direction: column; gap: .3rem; padding: .85rem .35rem .3rem; font: 9px/1.7 var(--font-geist-mono), monospace; color: var(--secondary); }
 .artifact figcaption > :first-child { color: var(--ink); text-transform: uppercase; letter-spacing: .06em; }
 .afterword { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(3rem, 6vw, 6rem); margin-top: clamp(4rem, 6vw, 7rem); }
@@ -37,8 +34,8 @@
   .composition { grid-template-columns: 1fr; gap: 3rem; }
   .headline { max-width: 23ch; font-size: clamp(2.7rem, 5.7vw, 3.8rem); }
   .artifacts { display: grid; grid-template-columns: 1.15fr 1fr; align-items: start; gap: 2rem; padding: 0; }
-  .workspace, .notes { width: 100%; margin: 0; transform: none; }
-  .notes { margin-top: 3rem; }
+  .team, .principles { width: 100%; margin: 0; transform: none; }
+  .principles { margin-top: 3rem; }
   .afterword { grid-template-columns: 1fr; gap: 2rem; }
 }
 @media (max-width: 600px) {
@@ -46,14 +43,14 @@
   .headline { font-size: clamp(2.4rem, 10.2vw, 3.5rem); }
   .body { font-size: 15px; line-height: 1.85; }
   .artifacts { grid-template-columns: 1fr; gap: 1.5rem; }
-  .notes { margin: 0; width: 88%; justify-self: end; }
+  .principles { margin: 0; width: 88%; justify-self: end; }
   .afterword { margin-top: 3.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .workspace, .notes { transform: none; }
+  .team, .principles { transform: none; }
 }
 
 /* The artifact cards remain intentional paper surfaces. */
 .opening, .afterword { position: relative; }
-.artifact .reserved, .artifact figcaption { color: var(--paper-muted); }
+.artifact figcaption { color: var(--paper-muted); }
 .pageEnd { border-color: var(--line); }

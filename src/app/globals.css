@@ -389,12 +389,10 @@ button { cursor: pointer; }
 .teaching-intro { margin-top: clamp(2rem, 4vw, 4rem); max-width: 41ch; }
 .teaching-intro h3 { margin-top: .8rem; font-size: 1.4rem; font-weight: 500; letter-spacing: -.025em; }
 .teaching-intro > p:last-child { margin-top: 1rem; font-size: 15px; line-height: 1.9; color: var(--secondary); }
-.teaching-artifact-field { position: relative; display: flex; align-items: center; min-height: 300px; padding: 2.5rem; background: #151b1c; border: 1px solid #394445; color: #b9c7c4; }
-.artifact-registration { position: absolute; font: 18px/1 var(--font-geist-mono), monospace; color: #728480; }
-.artifact-registration:first-child { top: .65rem; left: .65rem; }
-.artifact-registration:last-child { bottom: .65rem; right: .65rem; }
-.artifact-title { margin-top: 1.5rem; font: 400 clamp(1.9rem, 3vw, 2.8rem)/1.1 var(--font-bricolage), sans-serif; letter-spacing: -.04em; }
-.artifact-placeholder { margin-top: 1.5rem; max-width: 33ch; font-size: 12px; line-height: 1.7; color: #a4b2af; }
+.teaching-artifact { max-width: clamp(390px, 30vw, 460px); margin-inline-start: auto; }
+.teaching-artifact { max-width: clamp(390px, 30vw, 460px); margin-inline-start: auto; }
+.teaching-artifact-field { position: relative; overflow: hidden; background: #151b1c; border: 1px solid #394445; }
+.teaching-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
 .teaching-artifact figcaption { margin-top: .65rem; color: var(--secondary); font-size: 9px; }
 .teaching-syllabus { margin-top: 1.8rem; }
 .teaching-syllabus > p { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding-bottom: .65rem; color: #b9c7c4; }
@@ -435,8 +433,9 @@ button { cursor: pointer; }
 .footer-baseline > a { margin-left: auto; font-size: 11px; gap: 1rem; }
 @media (max-width: 1099px) {
   .teaching-feature { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .teaching-artifact { max-width: none; margin-inline-start: 0; }
+  .teaching-artifact { max-width: none; margin-inline-start: 0; }
   .teaching-copy h2 { font-size: clamp(3rem, 6.5vw, 4.5rem); }
-  .teaching-artifact-field { padding: 1.5rem; min-height: 280px; }
   .teaching-reflection { grid-template-columns: 1fr 3fr; margin-top: 1.5rem; }
   .supporting-activity { grid-template-columns: 1fr 2fr; gap: .75rem 2rem; }
   .supporting-activity > :first-child { grid-column: 1; }
@@ -453,7 +452,6 @@ button { cursor: pointer; }
   .teaching-feature { grid-template-columns: 1fr; margin-top: 1.6rem; }
   .teaching-copy h2 { font-size: clamp(3rem, 14vw, 4.5rem); }
   .teaching-intro { margin-top: 2rem; }
-  .teaching-artifact-field { min-height: 260px; }
   .teaching-reflection { grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; padding-bottom: 2rem; }
   .supporting-activity { grid-template-columns: 1fr; gap: .65rem; }
   .activity-description { grid-column: 1; grid-row: auto; margin-top: .25rem; }

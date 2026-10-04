@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 import { activities } from "@/data/experience";
 
@@ -19,14 +20,19 @@ export default function BeyondCode() {
             </div>
           </div>
           <div className="teaching-materials">
-            {/* TODO: Replace the labeled placeholder with a real teaching photo or lesson material. */}
             <figure className="teaching-artifact">
               <div className="teaching-artifact-field">
-                <span className="artifact-registration" aria-hidden="true">+</span>
-                <div><p className="eyebrow">Community / Teaching photo</p><p className="artifact-title">A space for<br />shared learning.</p><p className="artifact-placeholder">Placeholder for a real photograph or classroom material.</p></div>
-                <span className="artifact-registration" aria-hidden="true">+</span>
+                <Image
+                  src="/images/artifacts/community-math-teaching-2026.jpg"
+                  alt="Matthew in a classroom during the Community Math Teaching program."
+                  width={600}
+                  height={450}
+                  sizes="(max-width: 599px) calc(100vw - 50px), (max-width: 767px) calc(50vw - 42px), (max-width: 1023px) calc(50vw - 58px), (max-width: 1099px) calc(50vw - 66px), (max-width: 1300px) 388px, (max-width: 1533px) calc(30vw - 2px), 458px"
+                  loading="lazy"
+                  className="teaching-photo"
+                />
               </div>
-              <figcaption className="eyebrow">Community Teaching Program / 2026</figcaption>
+              <figcaption className="eyebrow">Community Math Teaching / 2026</figcaption>
             </figure>
             <div className="teaching-syllabus">
               <p className="eyebrow">Five weekly sessions <span>Topics covered</span></p>
