@@ -12,7 +12,7 @@ https://matthewsutiono.vercel.app/
 
 I am a Computer Science undergraduate at BINUS University specializing in Intelligent Systems.
 
-I enjoy learning through building projects and exploring how software, data, and AI can be used to solve practical problems. My experience includes full-stack development, machine learning, natural language processing, computer vision, research, and collaborative technical projects.
+I enjoy learning through building projects and exploring how software, data, and AI can be used to solve practical problems. My experience includes full-stack development, machine learning, natural language processing, computer vision, and collaborative technical projects.
 
 This portfolio was built to document both the final outcomes and the thinking behind the projects I have worked on.
 
@@ -42,27 +42,23 @@ The application allows users to create habits, define weekly goals, complete che
 
 ---
 
-### Toxic Comment Detector
+### Indonesian Hate Speech Detection
 
-A machine learning web application for classifying text as toxic or non-toxic.
+A team project for screening Indonesian text using two separate signals: toxicity risk and abusive-language matches.
 
-The system uses TF-IDF text representation and Logistic Regression, with predictions exposed through a FastAPI backend and displayed through a lightweight web interface.
+The system shows fine-tuned IndoBERT risk probabilities alongside independent lexicon matches, giving reviewers both signals while leaving room for human judgment.
 
 **Technologies**
 
 - Python
-- Scikit-learn
-- TF-IDF
+- IndoBERT
 - Logistic Regression
-- FastAPI
-- HTML
-- CSS
-- JavaScript
-- Vercel
-- Railway
+- SVM
+- Naive Bayes
+- Lexicon-based matching
+- Streamlit
 
-**Role:** Machine Learning / NLP Project Lead  
-**Team:** 3 members
+**Role:** Machine Learning / NLP Project Contributor
 
 ---
 

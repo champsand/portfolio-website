@@ -1,13 +1,14 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useReducedMotionPreference } from "@/lib/useReducedMotionPreference";
 import Container from "@/components/layout/Container";
 import HeroFallback from "./HeroFallback";
 
 export default function HeroExperience({ eyebrow, name, statement, index, scroll }: Record<"eyebrow" | "name" | "statement" | "index" | "scroll", ReactNode>) {
   const section = useRef<HTMLElement>(null);
-  const reduced = useReducedMotion();
+  const reduced = useReducedMotionPreference();
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end start"] });
   const eyebrowY = useTransform(scrollYProgress, [0, 1], [0, -30]);
   const nameY = useTransform(scrollYProgress, [0, 1], [0, -80]);

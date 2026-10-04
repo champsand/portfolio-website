@@ -75,21 +75,10 @@ button { cursor: pointer; }
 @layer components {
   .eyebrow { @apply font-mono text-[10px] leading-5 tracking-[0.12em] uppercase sm:text-[11px]; }
 
-  .section-title {
-    @apply font-display font-medium;
-    font-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
-    line-height: 1.12;
-    letter-spacing: -0.045em;
-    max-width: 24ch;
-    overflow-wrap: break-word;
-  }
-
   .editorial-emphasis {
     @apply font-editorial font-normal italic;
     letter-spacing: -0.025em;
   }
-
-  .prose-measure { max-width: var(--text-measure); }
 
   .nav-link {
     @apply inline-flex min-h-11 min-w-11 items-center font-mono text-xs text-secondary;
@@ -117,8 +106,6 @@ button { cursor: pointer; }
 
   .button-secondary { @apply border-line; }
   .button-secondary:hover, .button-secondary:focus-visible { @apply border-secondary bg-surface; }
-
-  .section-space { padding-block: var(--section-space); }
 
   .text-link {
     @apply inline-flex min-h-11 items-center gap-2 text-sm font-medium underline underline-offset-4;
@@ -389,12 +376,8 @@ button { cursor: pointer; }
 .teaching-intro { margin-top: clamp(2rem, 4vw, 4rem); max-width: 41ch; }
 .teaching-intro h3 { margin-top: .8rem; font-size: 1.4rem; font-weight: 500; letter-spacing: -.025em; }
 .teaching-intro > p:last-child { margin-top: 1rem; font-size: 15px; line-height: 1.9; color: var(--secondary); }
-.teaching-artifact { max-width: clamp(390px, 30vw, 460px); margin-inline-start: auto; }
-.teaching-artifact { max-width: clamp(390px, 30vw, 460px); margin-inline-start: auto; }
-.teaching-artifact-field { position: relative; overflow: hidden; background: #151b1c; border: 1px solid #394445; }
-.teaching-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
-.teaching-artifact figcaption { margin-top: .65rem; color: var(--secondary); font-size: 9px; }
-.teaching-syllabus { margin-top: 1.8rem; }
+.teaching-materials { align-self: end; }
+.teaching-syllabus { padding-top: 1rem; }
 .teaching-syllabus > p { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding-bottom: .65rem; color: #b9c7c4; }
 .teaching-syllabus > p span { color: var(--secondary); }
 .teaching-syllabus li { display: flex; gap: 1.5rem; border-top: 1px solid var(--line); padding-block: .6rem; font-size: 13px; line-height: 1.6; }
@@ -433,8 +416,6 @@ button { cursor: pointer; }
 .footer-baseline > a { margin-left: auto; font-size: 11px; gap: 1rem; }
 @media (max-width: 1099px) {
   .teaching-feature { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .teaching-artifact { max-width: none; margin-inline-start: 0; }
-  .teaching-artifact { max-width: none; margin-inline-start: 0; }
   .teaching-copy h2 { font-size: clamp(3rem, 6.5vw, 4.5rem); }
   .teaching-reflection { grid-template-columns: 1fr 3fr; margin-top: 1.5rem; }
   .supporting-activity { grid-template-columns: 1fr 2fr; gap: .75rem 2rem; }
